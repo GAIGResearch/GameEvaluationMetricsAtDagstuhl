@@ -6,7 +6,11 @@
 package metrics;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+
+import metrics.plot.MetricVisualiser;
 
 /**
  *
@@ -17,15 +21,24 @@ public class SampleLogger implements GameLogger {
     ArrayList<Integer> actionList;
     ArrayList<GameEvent[]> gameEvents;
     ArrayList<Double> decisivenessHistory;
-
+    ArrayList<Map<String, Integer>> gameObjects;
 
 
     ArrayList<Double> scoreHistory;
 
+    ArrayList<Double> scores = new ArrayList();
+    
+    MetricVisualiser visualiser = new MetricVisualiser();
+    
     @Override
     public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
         actionList.add(actions[0]);
-        scoreHistory.add(state.getScore());
+
+        if (state != null){
+            scores.add(state.getScore());  
+        }
+        visualiser.update(scores);
+
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -36,15 +49,18 @@ public class SampleLogger implements GameLogger {
         return this;
     }
 
-    @Override
-    public GameLogger logScore(LoggableGameState state, double[] scores, GameEvent[] events) {
-        scoreHistory.add(scores[0]);
+    public GameLogger logObjectDensity(Map<String, Integer> objects)
+    {
+        gameObjects.add(objects);
         return this;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public GameLogger startGame() {
+        actionList = new ArrayList<>();
+        gameEvents = new ArrayList<>();
+        gameObjects = new ArrayList<>();
+
         resetRecords();
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -53,9 +69,18 @@ public class SampleLogger implements GameLogger {
     @Override
     public GameLogger terminateGame() {
 
+        debug();
+        return this;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    private void debug()
+    {
         /// PRINTING ENTROPY
         double entropy = metrics.Utils.entropy(actionList);
+        System.out.println("[LOGGER] Entropy of actions: " + entropy);
+//        MetricVisualiser visualiser = Met
+
         Utils.printLogMsg("Entropy of actions: " + entropy);
 
         double[] scoreDiff = metrics.Utils.differentialArray(scoreHistory);
@@ -68,23 +93,45 @@ public class SampleLogger implements GameLogger {
         System.out.print("\n");
 
 
+        /// PRINTING GAME OBJECTS
+        //ArrayList<Map<String, Integer>> gameObjects;
+        int timeSteps = 0;
+        for(Map<String, Integer> gObjs : gameObjects)
+        {
+            if(gObjs != null)
+            {
+                System.out.print("[LOGGER] " + timeSteps + " ");
+                Iterator<Map.Entry<String, Integer>> objsIt = gObjs.entrySet().iterator();
+                while(objsIt.hasNext())
+                {
+                    Map.Entry<String, Integer> entry = objsIt.next();
+                    System.out.print(entry.getKey() + ": " + entry.getValue() + "; ");
+                }
+                System.out.println();
+
+            }
+            timeSteps++;
+        }
 
         /// PRINTING GAME EVENTS
-        int timeSteps = 0;
+        timeSteps = 0;
         for(GameEvent[] ges : gameEvents)
         {
             if(ges != null)
             {
                 System.out.print("[LOGGER] " + timeSteps + " ");
-                for(GameEvent ge : ges) System.out.print(ge.name + " at position " + ge.avatarPosition);
+                for(GameEvent ge : ges) System.out.print(ge.name + " at position " + ge.avatarPosition + "; ");
                 System.out.println();
             }
             timeSteps++;
         }
 
+        System.out.println();
+        System.out.println("Score frequency distribution");
         System.out.println(new FrequencyMap().add(scoreDiff).getMap());
-        return this;
+
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        System.out.println();
     }
 
     public void resetRecords() {
@@ -99,6 +146,5 @@ public class SampleLogger implements GameLogger {
         decisivenessHistory.add(agentData.getDecisiveness());
         return this;
     }
-
 
 }

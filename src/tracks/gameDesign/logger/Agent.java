@@ -1,7 +1,9 @@
 package tracks.gameDesign.logger;
 
+import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
+import core.vgdl.VGDLRegistry;
 import metrics.GameEvent;
 import metrics.GameLogger;
 import metrics.SampleLogger;
@@ -11,6 +13,8 @@ import tools.ElapsedCpuTimer;
 import javax.swing.plaf.nimbus.State;
 import java.util.ArrayList;
 import metrics.AgentData;
+import java.util.*;
+
 
 /**
  * Created by dperez on 21/11/2017.
@@ -54,6 +58,9 @@ public class Agent extends AbstractPlayer {
         // double score = stateObs.getGameScore();
         // logger.logScore(null, new double[]{score}, null);
 
+        /// LOGGING OBJECT DENSITIY
+        logObjectDensity(stateObs);
+
         /// LOGGING GAME EVENTS
         logEvents(stateObs);
         return a;
@@ -86,4 +93,37 @@ public class Agent extends AbstractPlayer {
             logger.logEvents(null);
         }
     }
+
+    ///LOG OBJECT DENSITY
+    private void logObjectDensity(StateObservation stateObs)
+    {
+        ArrayList<Observation>[] npcPositions = stateObs.getNPCPositions();
+        Map<String, Integer> thisCountMap = new HashMap<String, Integer>();
+
+        _logObjects(thisCountMap, stateObs.getNPCPositions());
+        _logObjects(thisCountMap, stateObs.getImmovablePositions());
+        _logObjects(thisCountMap, stateObs.getMovablePositions());
+        _logObjects(thisCountMap, stateObs.getResourcesPositions());
+        _logObjects(thisCountMap, stateObs.getPortalsPositions());
+        _logObjects(thisCountMap, stateObs.getFromAvatarSpritesPositions());
+
+        logger.logObjectDensity(thisCountMap);
+
+    }
+
+    private void _logObjects(Map<String, Integer> thisCountMap, ArrayList<Observation>[] observations)
+    {
+        if(observations!=null) for (ArrayList<Observation> obs : observations) {
+            int count = obs.size();
+            if (count > 0) {
+                int objtype = obs.get(0).itype;
+                String objStr = VGDLRegistry.GetInstance().getRegisteredSpriteKey(objtype);
+
+                thisCountMap.put(objStr, count);
+            }
+        }
+    }
+
+
+
 }

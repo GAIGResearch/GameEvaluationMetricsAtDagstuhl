@@ -1,6 +1,8 @@
 package metrics;
 
 
+import java.util.Map;
+
 /**
  *  Simple interface for recording gameplay logs.
  *  Different methods should probably be in different
@@ -16,11 +18,17 @@ public interface GameLogger {
                           int[] actions,
                           GameEvent[] events);
 
-    GameLogger logScore(LoggableGameState state,
-                         double[] scores,
-                         GameEvent[] events);
     GameLogger logEvents(GameEvent[] gameEventsNow);
+
     
     GameLogger logAgentData(LoggableGameState state, AgentData agentData);
+
+    GameLogger logObjectDensity(Map<String, Integer> objects);
+
+//    public void logAction(AbstractGameState state,
+//                          InputEvent[] actions,
+//                          GameEvent[] events);
+
+
 
 }
