@@ -1,5 +1,7 @@
 package metrics;
 
+import metrics.plot.MetricVisualiser;
+
 import java.nio.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -13,10 +15,17 @@ import java.util.Map;
 
 public class FileLogger implements GameLogger{
 
-    private ArrayList<Integer> actionList;
-    private ArrayList<GameEvent[]> gameEvents;
-    private ArrayList<Double> scoreHistory;
+    ArrayList<Integer> actionList;
+    ArrayList<GameEvent[]> gameEvents;
     ArrayList<Double> decisivenessHistory;
+    ArrayList<Map<String, Integer>> gameObjects;
+
+
+    ArrayList<Double> scoreHistory;
+
+    ArrayList<Double> scores = new ArrayList();
+
+    MetricVisualiser visualiser = new MetricVisualiser();
 
     public GameLogger logEvents(GameEvent[] gameEventsNow)
     {
@@ -34,7 +43,6 @@ public class FileLogger implements GameLogger{
         actionList.add(actions[0]);
 
         Charset utf8 = StandardCharsets.UTF_8;
-        //List<String> logg = new ArrayList<String>();
         List<String> logg = new ArrayList<>();
 
         actionList.forEach((action)->logg.add(action.toString()));
