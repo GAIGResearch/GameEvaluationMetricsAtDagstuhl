@@ -31,4 +31,5 @@ public class GVGAILoggableGameState implements LoggableGameState {
     public boolean isTerminal() {
         return stateObservation.isGameOver();
     }
+
 }
