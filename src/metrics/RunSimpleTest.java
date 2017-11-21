@@ -17,8 +17,10 @@ public class RunSimpleTest {
     
     public static void main(String[] args){
         //Run Game: GVGAI game with random agent
-        String map = "examples/gridphysics/aliens.txt";
-        String level = "examples/gridphysics/aliens_lvl0.txt";
+        String gameName = "aliens";
+        int levelId = 0;
+        String map = "examples/gridphysics/" + gameName+ ".txt";
+        String level = "examples/gridphysics/" + gameName+ "_lvl" + levelId + ".txt";
         String playerClassString = "tracks.singlePlayer.simple.sampleRandom.Agent";
         String action_file = "action_log.txt";
         System.out.println("Map: " + map);
