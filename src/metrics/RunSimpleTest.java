@@ -9,6 +9,7 @@ import java.util.Random;
 import tracks.ArcadeMachine;
 
 import static core.competition.CompetitionParameters.IMG_PATH;
+import static core.competition.CompetitionParameters.MAX_TIMESTEPS;
 
 /**
  *

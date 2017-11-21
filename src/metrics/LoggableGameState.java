@@ -3,9 +3,9 @@ package metrics;
 
 public interface LoggableGameState {
     
-    LoggableGameState copy();
+    // LoggableGameState copy();
 
-    LoggableGameState next(int[] actions);
+    // LoggableGameState next(int[] actions);
 
     int nActions();
 

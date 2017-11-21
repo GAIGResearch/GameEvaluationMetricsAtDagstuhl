@@ -18,10 +18,10 @@ import java.util.*;
  */
 public class Agent extends AbstractPlayer {
 
-
     private tracks.singlePlayer.advanced.sampleMCTS.Agent actualAgent;
 
     private GameLogger logger;
+    GVGAILoggableGameState gvgaiLoggableGameState;
 
     /**
      * initialize all variables for the agent
@@ -32,6 +32,7 @@ public class Agent extends AbstractPlayer {
         actualAgent = new tracks.singlePlayer.advanced.sampleMCTS.Agent(stateObs, elapsedTimer);
         logger = new SampleLogger();
         logger.startGame();
+        gvgaiLoggableGameState = new GVGAILoggableGameState();
     }
 
     /**
@@ -46,7 +47,10 @@ public class Agent extends AbstractPlayer {
         Types.ACTIONS a = actualAgent.act(stateObs, elapsedTimer);
 
         /// LOGGING ACTIONS.
-        logger.logAction(null, new int[]{a.ordinal()}, null);
+        gvgaiLoggableGameState.setGameState(stateObs);
+        logger.logAction(gvgaiLoggableGameState, new int[]{a.ordinal()}, null);
+        // double score = stateObs.getGameScore();
+        // logger.logScore(null, new double[]{score}, null);
 
         /// LOGGING OBJECT DENSITIY
         logObjectDensity(stateObs);
@@ -73,7 +77,8 @@ public class Agent extends AbstractPlayer {
             int i = 0;
 
             for (String event : eventsThisTick) {
-                GameEvent ge = new GameEvent(event);
+//                GameEvent ge = new GameEvent(event);
+                GameEvent ge = new GameEvent(event, stateObs.getGameTick(), stateObs.getAvatarPosition());
                 events[i] = ge;
                 i++;
             }

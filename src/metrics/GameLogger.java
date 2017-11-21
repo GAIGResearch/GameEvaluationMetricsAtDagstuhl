@@ -18,6 +18,9 @@ public interface GameLogger {
                           int[] actions,
                           GameEvent[] events);
 
+    GameLogger logScore(LoggableGameState state,
+                         double[] scores,
+                         GameEvent[] events);
     GameLogger logEvents(GameEvent[] gameEventsNow);
 
     GameLogger logObjectDensity(Map<String, Integer> objects);
