@@ -27,8 +27,6 @@ public class MetricVisualiser {
 			x_values.add(new Float(pos + 1));
 			y_values.add(new Float(scores.get(pos)));
 		}
-		System.out.println(x_values);
-		System.out.println(y_values);
 		graphPanel.showData(x_values, y_values);
 	}
 	
