@@ -49,20 +49,24 @@ public class Agent extends AbstractPlayer {
 
         Types.ACTIONS a = actualAgent.act(stateObs, elapsedTimer);
 
+        /// LOGGING OBJECT DENSITIY
+        Map<String, Integer> thisCountMap = logObjectDensity(stateObs);
+        gvgaiLoggableGameState.setGameObjects(thisCountMap);
+
+        /// LOGGING GAME EVENTS
+        logEvents(stateObs);
+
         /// LOGGING ACTIONS.
         AgentData agentData = new AgentData();
         agentData.setDecisiveness(actualAgent.getDecisiveness());
         logger.logAgentData(null, agentData);
+
+
         gvgaiLoggableGameState.setGameState(stateObs);
         logger.logAction(gvgaiLoggableGameState, new int[]{a.ordinal()}, null);
         // double score = stateObs.getGameScore();
         // logger.logScore(null, new double[]{score}, null);
 
-        /// LOGGING OBJECT DENSITIY
-        logObjectDensity(stateObs);
-
-        /// LOGGING GAME EVENTS
-        logEvents(stateObs);
         return a;
     }
 
@@ -94,7 +98,7 @@ public class Agent extends AbstractPlayer {
     }
 
     ///LOG OBJECT DENSITY
-    private void logObjectDensity(StateObservation stateObs)
+    private Map<String, Integer> logObjectDensity(StateObservation stateObs)
     {
         ArrayList<Observation>[] npcPositions = stateObs.getNPCPositions();
         Map<String, Integer> thisCountMap = new HashMap<String, Integer>();
@@ -107,6 +111,7 @@ public class Agent extends AbstractPlayer {
         _logObjects(thisCountMap, stateObs.getFromAvatarSpritesPositions());
 
         logger.logObjectDensity(thisCountMap);
+        return thisCountMap;
 
     }
 

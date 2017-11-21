@@ -4,6 +4,7 @@ package metrics;
 import tools.Vector2d;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Vector;
 
 public interface LoggableGameState {
@@ -21,6 +22,7 @@ public interface LoggableGameState {
 
     boolean isTerminal();
 
+    Map<String, Integer> getGameObjects();
 
     // List<Object> getGameState();
 
