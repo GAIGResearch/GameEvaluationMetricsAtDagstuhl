@@ -138,7 +138,7 @@ public class SqueezeGraphPanel extends JPanel {
 			p.y = Math.round((y + max_y) / y_range * (float) height);
 		if (p.y > height || p.y < 0){
 			float diff = y-min_y;
-			System.out.println(min_y + " " + max_y + " " + y_range + " " + y + " " + diff);
+//			System.out.println(min_y + " " + max_y + " " + y_range + " " + y + " " + diff);
 //			System.out.println(p.y + " " + height);
 		}
 	}
