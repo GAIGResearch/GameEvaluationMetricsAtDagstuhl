@@ -256,6 +256,39 @@ public class SingleTreeNode
         return selected;
     }
 
+     public double decisiveness() {
+        double totalVisits = 0;
+        double bestValue = -Double.MAX_VALUE;
+        double secondBest = -Double.MAX_VALUE;
+
+        for (int i=0; i<children.length; i++) {
+
+            if(children[i] != null)
+            {
+                double childValue = children[i].nVisits;
+                totalVisits += childValue;
+                childValue = Utils.noise(childValue, this.epsilon, this.m_rnd.nextDouble());     //break ties randomly
+                if (childValue > bestValue) {
+                    secondBest = bestValue;
+                    bestValue = childValue;
+                }else if(childValue>secondBest){
+                    secondBest = childValue;
+                }
+            }
+        }
+
+        if (bestValue < 0)
+        {
+            System.out.println("Unexpected decisiveness!");
+            return -1;
+        }else if(secondBest < 0){
+            return 0;
+        }else{
+            return (bestValue-secondBest)/totalVisits;   
+        }
+    }
+    
+    
     public int bestAction()
     {
         int selected = -1;

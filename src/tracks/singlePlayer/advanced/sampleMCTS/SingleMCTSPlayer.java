@@ -20,7 +20,15 @@ public class SingleMCTSPlayer
      * Root of the tree.
      */
     public SingleTreeNode m_root;
+    private double decisiveness;
 
+    public double getDecisiveness() {
+        return decisiveness;
+    }
+
+    public void setDecisiveness(double decisiveness) {
+        this.decisiveness = decisiveness;
+    }
     /**
      * Random generator.
      */
@@ -60,6 +68,7 @@ public class SingleMCTSPlayer
 
         //Determine the best action to take and return it.
         int action = m_root.mostVisitedAction();
+        this.setDecisiveness(m_root.decisiveness());
         //int action = m_root.bestAction();
         return action;
     }

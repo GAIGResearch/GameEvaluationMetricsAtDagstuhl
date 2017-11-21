@@ -38,6 +38,7 @@ public class Agent extends AbstractPlayer {
     public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
         Types.ACTIONS a = actualAgent.act(stateObs, elapsedTimer);
         logger.logAction(null, new int[]{a.ordinal()}, null);
+        System.out.println(actualAgent.getDecisiveness());
         return a;
     }
 
