@@ -196,6 +196,10 @@ public class ForwardModel extends Game
         this.avatarLastAction = new Types.ACTIONS[no_players];
         System.arraycopy(a_gameState.avatarLastAction, 0, avatarLastAction, 0, no_players);
         this.nextSpriteID = a_gameState.nextSpriteID;
+
+
+        ///
+        this.eventsThisTick = a_gameState.eventsThisTick;
     }
 
     /**

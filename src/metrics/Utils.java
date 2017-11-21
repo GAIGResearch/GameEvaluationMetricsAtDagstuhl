@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Utils {
+    static final String LOG = "[LOGGER] ";
+    static final String ERROR = "[ERROR] ";
 
     // Normalizes a value between its MIN and MAX.
     public static double normalise(double a_value, double a_min, double a_max)
@@ -43,26 +45,62 @@ public class Utils {
         int key;
         for (int i=0; i<nbEntries; i++) {
             key = entries.get(i);
-            System.out.println("key is " + key );
             if (occurrences.get(key) == null) {
                 occurrences.put(key, 1);
             } else {
                 int value = occurrences.get(key);
-
-                System.out.println("key is " + key + " value is " + value);
-
                 occurrences.replace(key, value, value + 1);
             }
         }
         double entropy = 0.0;
         for (int value : occurrences.values()) {
-            System.out.println(entropy);
-            double p =
-            entropy -= (double) (value/nbEntries) * Math.log((double) (value/nbEntries)) / Math.log(2.0);
+            double p = (double) value/nbEntries;
+            entropy -= p * Math.log(p);
 
         }
         return entropy;
     }
 
+    public static double[] differentialArray(ArrayList<Double> entries) {
+        double[] diff = new double[entries.size()];
+        diff[0] = 0.0;
+        for (int i=1; i<diff.length; i++) {
+            diff[i] = entries.get(i) - entries.get(i-1);
+        }
+        return diff;
+    }
+
+//    public static void printLogMsg(String msg) {
+//        System.out.println(LOG + msg);
+//    }
+//
+//    public static void printLogMsg(int msg) {
+//        System.out.println(LOG + msg);
+//    }
+//
+//    public static void printLogMsg(double msg) {
+//        System.out.println(LOG + msg);
+//    }
+
+    public static String printLogMsg(Object msg) {
+        String str = "";
+        if (msg instanceof double[]) {
+            double[] array = (double[]) msg;
+            str += array[0];
+            for (int i=1; i<array.length; i++) {
+                str += "," + array[i];
+            }
+            return str;
+        }
+        if (msg instanceof Double || msg instanceof Integer || msg instanceof String) {
+            str += msg;
+            return str;
+        }
+        return ("The type of object to print is not supported yet.");
+    }
+
+    public static void printLogMsgWithTag(String tag, Object msg) {
+        System.out.println(LOG + tag + printLogMsg(msg));
+    }
 
 }
