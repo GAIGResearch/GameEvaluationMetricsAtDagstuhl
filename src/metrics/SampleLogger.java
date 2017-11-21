@@ -35,9 +35,8 @@ public class SampleLogger implements GameLogger {
         actionList.add(actions[0]);
 
         if (state != null){
-            scores.add(state.getScore());
+            visualiser.update(state);
         }
-        visualiser.update(scores);
 
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
