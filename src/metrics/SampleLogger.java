@@ -18,6 +18,7 @@ public class SampleLogger implements GameLogger {
     ArrayList<GameEvent[]> gameEvents;
 
 
+
     ArrayList<Double> scoreHistory;
 
     @Override
@@ -74,6 +75,7 @@ public class SampleLogger implements GameLogger {
             timeSteps++;
         }
 
+        System.out.println(new FrequencyMap().add(scoreDiff).getMap());
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
