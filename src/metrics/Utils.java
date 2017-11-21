@@ -71,6 +71,7 @@ public class Utils {
                     diff[i] = entries.get(i) - entries.get(i - 1);
                 }
             }
+        }
         return diff;
     }
 
