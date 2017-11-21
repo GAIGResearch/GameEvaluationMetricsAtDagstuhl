@@ -20,6 +20,6 @@ public interface GameLogger {
 //                          InputEvent[] actions,
 //                          GameEvent[] events);
 
-    
+
 
 }
