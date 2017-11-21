@@ -21,6 +21,7 @@ public class SampleLogger implements GameLogger {
     ArrayList<Integer> actionList;
     ArrayList<GameEvent[]> gameEvents;
     ArrayList<Double> decisivenessHistory;
+    ArrayList<Double> convergenceHistory;
     ArrayList<Map<String, Integer>> gameObjects;
 
 
@@ -91,6 +92,12 @@ public class SampleLogger implements GameLogger {
             System.out.print(dec + ", ");
         }
         System.out.print("\n");
+        
+        System.out.print("Convergence: ");
+        for(double dec: convergenceHistory){
+            System.out.print(dec + ", ");
+        }
+        System.out.print("\n");
 
 
         /// PRINTING GAME OBJECTS
@@ -139,11 +146,13 @@ public class SampleLogger implements GameLogger {
         scoreHistory = new ArrayList<>();
         gameEvents = new ArrayList<>();
         decisivenessHistory = new ArrayList<>();
+        convergenceHistory = new ArrayList<>();
     }
 
     @Override
     public GameLogger logAgentData(LoggableGameState state, AgentData agentData) {
         decisivenessHistory.add(agentData.getDecisiveness());
+        convergenceHistory.add(agentData.getConvergence());
         return this;
     }
 

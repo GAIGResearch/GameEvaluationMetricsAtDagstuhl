@@ -71,5 +71,9 @@ public class Agent extends AbstractPlayer {
         return mctsPlayer.getDecisiveness();
     }
 
+    public double getConvergence() {
+        return mctsPlayer.getConvergence();
+    }
+
 
 }

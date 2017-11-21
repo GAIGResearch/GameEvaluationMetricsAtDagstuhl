@@ -59,6 +59,7 @@ public class Agent extends AbstractPlayer {
         /// LOGGING ACTIONS.
         AgentData agentData = new AgentData();
         agentData.setDecisiveness(actualAgent.getDecisiveness());
+        agentData.setConvergence(actualAgent.getConvergence());
         logger.logAgentData(null, agentData);
 
 
