@@ -10,6 +10,7 @@ import tools.ElapsedCpuTimer;
 
 import javax.swing.plaf.nimbus.State;
 import java.util.ArrayList;
+import metrics.AgentData;
 
 /**
  * Created by dperez on 21/11/2017.
@@ -45,7 +46,9 @@ public class Agent extends AbstractPlayer {
 
         /// LOGGING ACTIONS.
         logger.logAction(null, new int[]{a.ordinal()}, null);
-        System.out.println(actualAgent.getDecisiveness());
+        AgentData agentData = new AgentData();
+        agentData.setDecisiveness(actualAgent.getDecisiveness());
+        logger.logAgentData(null, agentData);
         double score = stateObs.getGameScore();
         logger.logScore(null, new double[]{score}, null);
 

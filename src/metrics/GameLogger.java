@@ -20,11 +20,7 @@ public interface GameLogger {
                          double[] scores,
                          GameEvent[] events);
     GameLogger logEvents(GameEvent[] gameEventsNow);
-
-//    public void logAction(AbstractGameState state,
-//                          InputEvent[] actions,
-//                          GameEvent[] events);
-
-
+    
+    GameLogger logAgentData(LoggableGameState state, AgentData agentData);
 
 }

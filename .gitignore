@@ -1,4 +1,3 @@
-
 *.xml
 *.iml
 *.class
@@ -7,3 +6,4 @@ out/production/AIGameDesignAtDagstuhl/source_list.txt
 out/production/AIGameDesignAtDagstuhl/tracks/singleLearning/utils/runClient_nocompile.bat
 out/production/AIGameDesignAtDagstuhl/tracks/singleLearning/utils/runClient_nocompile_pipes.sh
 action_log.txt
+/dist/
