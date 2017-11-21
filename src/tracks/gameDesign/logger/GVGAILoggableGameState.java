@@ -1,14 +1,15 @@
 package tracks.gameDesign.logger;
 
-import core.game.StateObservation;
-import metrics.LoggableGameState;
-
+import java.util.HashMap;
 import java.util.Map;
+
+import metrics.LoggableGameState;
+import core.game.StateObservation;
 
 public class GVGAILoggableGameState implements LoggableGameState {
 
     StateObservation stateObservation;
-    Map<String, Integer> gameObjects;
+    HashMap<String, Integer> gameObjects;
 
     LoggableGameState setGameState(StateObservation stateObservation) {
         this.stateObservation = stateObservation;
@@ -36,11 +37,11 @@ public class GVGAILoggableGameState implements LoggableGameState {
     }
 
     @Override
-    public Map<String, Integer> getGameObjects() {
+    public HashMap<String, Integer> getGameObjects() {
         return this.gameObjects;
     }
 
-    public void setGameObjects(Map<String, Integer> gameObjects)
+    public void setGameObjects(HashMap<String, Integer> gameObjects)
     {
         this.gameObjects = gameObjects;
     }

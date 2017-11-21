@@ -19,17 +19,14 @@ public class SqueezeGraphPanel extends JPanel {
 
 	private Color background_colour;
 
-	private Color line_colour;
-
 	private BufferedImage graph_image;
 
-	public SqueezeGraphPanel(float y_axis, Color background_colour, Color line_colour) {
+	public SqueezeGraphPanel(float y_axis, Color background_colour) {
 		this.y_axis = y_axis;
 		this.background_colour = background_colour;
-		this.line_colour = line_colour;
 	}
 
-	public void showData(ArrayList<Float> x_values, ArrayList<Float> y_values) {
+	public void showData(ArrayList<Float> x_values, ArrayList<Float> y_values, boolean clearIt, Color lineColour) {
 		repaint();
 		int width = getWidth() * 2;
 		int height = getHeight() * 2;
@@ -38,13 +35,15 @@ public class SqueezeGraphPanel extends JPanel {
 		Graphics2D graphics = graph_image.createGraphics();
 		if (graphics != null) {
 			try {
-				graphics.setColor(background_colour);
-				graphics.fillRect(0, 0, width, height);
+				if (clearIt){
+					graphics.setColor(background_colour);
+					graphics.fillRect(0, 0, width, height);					
+				}
 				graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 						RenderingHints.VALUE_ANTIALIAS_ON);
 
 				Point old_point = new Point();
-				graphics.setColor(line_colour);
+				graphics.setColor(lineColour);
 				float min_x = 100000000;
 				float max_x = -100000000;
 				float min_y = 100000000;
@@ -102,7 +101,7 @@ public class SqueezeGraphPanel extends JPanel {
 				old_point.y = p.y;
 				getPoint(max_x, av_y, min_x, max_x, min_y, max_y, width, height, p);
 				graphics.drawLine(old_point.x, old_point.y, p.x, p.y);
-				graphics.setColor(line_colour);
+				graphics.setColor(lineColour);
 				graphics.setFont(new Font("Arial", Font.PLAIN,
 						30));
 				String av_ups = Float.toString(av_up);
@@ -113,10 +112,10 @@ public class SqueezeGraphPanel extends JPanel {
 				max_down = max_down.substring(0, Math.min(max_down.length(), 5));
 				String max_up = Float.toString(max_y);
 				max_up = max_up.substring(0, Math.min(max_up.length(), 5));
-				graphics.drawString("Upper: " + up_count + " (" + av_ups + ", " + max_up + ")", 10,
-						40);
-				graphics.drawString("Downer: " + down_count + " (" + av_downs + ", " + max_down
-						+ ")", 10, 80);
+				//graphics.drawString("Upper: " + up_count + " (" + av_ups + ", " + max_up + ")", 10,
+				//		40);
+				//graphics.drawString("Downer: " + down_count + " (" + av_downs + ", " + max_down
+				//		+ ")", 10, 80);
 			} finally {
 				graphics.dispose();
 			}

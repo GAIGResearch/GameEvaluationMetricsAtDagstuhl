@@ -1,19 +1,19 @@
 package tracks.gameDesign.logger;
 
-import core.game.Observation;
-import core.game.StateObservation;
-import core.player.AbstractPlayer;
-import core.vgdl.VGDLRegistry;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import metrics.AgentData;
 import metrics.GameEvent;
 import metrics.GameLogger;
 import metrics.SampleLogger;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
-
-import javax.swing.plaf.nimbus.State;
-import java.util.ArrayList;
-import metrics.AgentData;
-import java.util.*;
+import core.game.Observation;
+import core.game.StateObservation;
+import core.player.AbstractPlayer;
+import core.vgdl.VGDLRegistry;
 
 
 /**
@@ -50,7 +50,7 @@ public class Agent extends AbstractPlayer {
         Types.ACTIONS a = actualAgent.act(stateObs, elapsedTimer);
 
         /// LOGGING OBJECT DENSITIY
-        Map<String, Integer> thisCountMap = logObjectDensity(stateObs);
+        HashMap<String, Integer> thisCountMap = logObjectDensity(stateObs);
         gvgaiLoggableGameState.setGameObjects(thisCountMap);
 
         /// LOGGING GAME EVENTS
@@ -98,10 +98,10 @@ public class Agent extends AbstractPlayer {
     }
 
     ///LOG OBJECT DENSITY
-    private Map<String, Integer> logObjectDensity(StateObservation stateObs)
+    private HashMap<String, Integer> logObjectDensity(StateObservation stateObs)
     {
         ArrayList<Observation>[] npcPositions = stateObs.getNPCPositions();
-        Map<String, Integer> thisCountMap = new HashMap<String, Integer>();
+        HashMap<String, Integer> thisCountMap = new HashMap<String, Integer>();
 
         _logObjects(thisCountMap, stateObs.getNPCPositions());
         _logObjects(thisCountMap, stateObs.getImmovablePositions());
