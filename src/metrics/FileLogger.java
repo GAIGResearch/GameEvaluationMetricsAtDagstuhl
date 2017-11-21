@@ -9,6 +9,7 @@ import java.lang.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FileLogger implements GameLogger{
 
@@ -20,6 +21,11 @@ public class FileLogger implements GameLogger{
     {
         gameEvents.add(gameEventsNow);
         return this;
+    }
+
+    @Override
+    public GameLogger logObjectDensity(Map<String, Integer> objects) {
+        return null;
     }
 
     @Override
