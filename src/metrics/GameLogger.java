@@ -16,6 +16,8 @@ public interface GameLogger {
                           int[] actions,
                           GameEvent[] events);
 
+    GameLogger logEvents(GameEvent[] gameEventsNow);
+
 //    public void logAction(AbstractGameState state,
 //                          InputEvent[] actions,
 //                          GameEvent[] events);
