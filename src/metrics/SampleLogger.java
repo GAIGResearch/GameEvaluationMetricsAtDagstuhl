@@ -19,11 +19,13 @@ public class SampleLogger implements GameLogger {
     ArrayList<Double> decisivenessHistory;
 
 
+
     ArrayList<Double> scoreHistory;
 
     @Override
     public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
         actionList.add(actions[0]);
+        scoreHistory.add(state.getScore());
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -74,12 +76,13 @@ public class SampleLogger implements GameLogger {
             if(ges != null)
             {
                 System.out.print("[LOGGER] " + timeSteps + " ");
-                for(GameEvent ge : ges) System.out.print(ge.name + ";");
+                for(GameEvent ge : ges) System.out.print(ge.name + " at position " + ge.avatarPosition);
                 System.out.println();
             }
             timeSteps++;
         }
 
+        System.out.println(new FrequencyMap().add(scoreDiff).getMap());
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
