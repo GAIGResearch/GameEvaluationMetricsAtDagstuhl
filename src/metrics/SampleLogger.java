@@ -34,9 +34,6 @@ public class SampleLogger implements GameLogger {
         if (state != null){
             scores.add(state.getScore());  
         }
-        else{
-        	scores.add(Math.random() * 10);
-        }
         visualiser.update(scores);
 
         return this;
