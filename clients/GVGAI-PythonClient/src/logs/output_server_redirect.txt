@@ -1,0 +1,54 @@
+Server asked to run at port: 8080 where games are IN /Users/dperez/Work/git/gvgai/clients/GVGAI-PythonClient/src/../../../examples
+Starting First Phase of Training in 3 levels.
+Result (1->win; 0->lose): Player0:0, Player0-Score:37.0, timesteps:353
+Result (1->win; 0->lose): Player0:0, Player0-Score:35.0, timesteps:258
+Result (1->win; 0->lose): Player0:0, Player0-Score:29.0, timesteps:244
+Starting Second Phase of Training in 3 levels.
+Result (1->win; 0->lose): Player0:0, Player0-Score:51.0, timesteps:423
+Result (1->win; 0->lose): Player0:0, Player0-Score:28.0, timesteps:271
+Result (1->win; 0->lose): Player0:0, Player0-Score:29.0, timesteps:255
+Result (1->win; 0->lose): Player0:0, Player0-Score:35.0, timesteps:322
+Result (1->win; 0->lose): Player0:-1, Player0-Score:64.0, timesteps:1000
+Result (1->win; 0->lose): Player0:1, Player0-Score:59.0, timesteps:765
+Result (1->win; 0->lose): Player0:0, Player0-Score:54.0, timesteps:914
+Result (1->win; 0->lose): Player0:0, Player0-Score:36.0, timesteps:275
+Result (1->win; 0->lose): Player0:0, Player0-Score:56.0, timesteps:807
+Result (1->win; 0->lose): Player0:0, Player0-Score:16.0, timesteps:155
+Result (1->win; 0->lose): Player0:0, Player0-Score:34.0, timesteps:242
+Result (1->win; 0->lose): Player0:0, Player0-Score:25.0, timesteps:253
+Result (1->win; 0->lose): Player0:1, Player0-Score:59.0, timesteps:699
+Result (1->win; 0->lose): Player0:0, Player0-Score:33.0, timesteps:260
+Result (1->win; 0->lose): Player0:1, Player0-Score:60.0, timesteps:636
+Result (1->win; 0->lose): Player0:0, Player0-Score:63.0, timesteps:986
+Result (1->win; 0->lose): Player0:1, Player0-Score:63.0, timesteps:627
+Result (1->win; 0->lose): Player0:0, Player0-Score:37.0, timesteps:272
+Result (1->win; 0->lose): Player0:0, Player0-Score:57.0, timesteps:737
+Result (1->win; 0->lose): Player0:0, Player0-Score:17.0, timesteps:193
+Result (1->win; 0->lose): Player0:0, Player0-Score:32.0, timesteps:258
+Result (1->win; 0->lose): Player0:1, Player0-Score:54.0, timesteps:760
+Result (1->win; 0->lose): Player0:1, Player0-Score:60.0, timesteps:655
+Result (1->win; 0->lose): Player0:0, Player0-Score:8.0, timesteps:142
+Result (1->win; 0->lose): Player0:0, Player0-Score:68.0, timesteps:876
+Result (1->win; 0->lose): Player0:0, Player0-Score:53.0, timesteps:436
+Result (1->win; 0->lose): Player0:1, Player0-Score:65.0, timesteps:829
+Result (1->win; 0->lose): Player0:0, Player0-Score:27.0, timesteps:242
+Result (1->win; 0->lose): Player0:1, Player0-Score:66.0, timesteps:746
+Result (1->win; 0->lose): Player0:1, Player0-Score:58.0, timesteps:729
+Result (1->win; 0->lose): Player0:1, Player0-Score:58.0, timesteps:463
+Result (1->win; 0->lose): Player0:1, Player0-Score:70.0, timesteps:903
+Result (1->win; 0->lose): Player0:1, Player0-Score:61.0, timesteps:810
+Result (1->win; 0->lose): Player0:0, Player0-Score:43.0, timesteps:443
+Result (1->win; 0->lose): Player0:0, Player0-Score:41.0, timesteps:402
+Result (1->win; 0->lose): Player0:1, Player0-Score:60.0, timesteps:803
+Result (1->win; 0->lose): Player0:0, Player0-Score:65.0, timesteps:794
+Result (1->win; 0->lose): Player0:0, Player0-Score:51.0, timesteps:496
+Result (1->win; 0->lose): Player0:0, Player0-Score:54.0, timesteps:819
+Result (1->win; 0->lose): Player0:0, Player0-Score:43.0, timesteps:432
+Result (1->win; 0->lose): Player0:1, Player0-Score:62.0, timesteps:664
+Result (1->win; 0->lose): Player0:0, Player0-Score:57.0, timesteps:566
+Starting Validation in 2 levels.
+Result (1->win; 0->lose): Player0:0, Player0-Score:7.0, timesteps:190
+Result (1->win; 0->lose): Player0:0, Player0-Score:31.0, timesteps:319
+Results in game ../../../examples/gridphysics/aliens.txt, 0.2978723404255319 , 46.191489361702125
+
+ 	 --> Real execution time: 1 minutes, 2 seconds of wall time.
