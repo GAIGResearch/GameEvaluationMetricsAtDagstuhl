@@ -76,13 +76,31 @@ public abstract class Effect{
     protected Rectangle collision;
 
     /**
+     * Number of times this event was executed in the real game.
+     */
+    public String effectName;
+    public int eventCount = 0;
+
+    /**
+     * Executes and logs
+     * @param sprite1
+     * @param sprite2
+     * @param game
+     */
+    public void executeEnhanced(VGDLSprite sprite1, VGDLSprite sprite2, Game game)
+    {
+        eventCount++;
+        this.execute(sprite1, sprite2, game);
+    }
+
+    /**
      * Executes the effect
      *
      * @param sprite1 first sprite of the collision
      * @param sprite2 second sprite of the collision
      * @param game    reference to the game object with the current state.
      */
-    public abstract void execute(VGDLSprite sprite1, VGDLSprite sprite2, Game game);
+    protected abstract void execute(VGDLSprite sprite1, VGDLSprite sprite2, Game game);
 
 
     /**

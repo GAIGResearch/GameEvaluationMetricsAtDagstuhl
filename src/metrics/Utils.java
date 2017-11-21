@@ -37,10 +37,10 @@ public class Utils {
     }
 
     // Calculate entropy
-    public static double entropy(ArrayList<Object> entries) {
+    public static double entropy(ArrayList<Integer> entries) {
         int nbEntries = entries.size();
-        HashMap<Object,Integer> occurrences = new HashMap<>();
-        Object key;
+        HashMap<Integer,Integer> occurrences = new HashMap<>();
+        int key;
         for (int i=0; i<nbEntries; i++) {
             key = entries.get(i);
             if (occurrences.get(key) == null) {

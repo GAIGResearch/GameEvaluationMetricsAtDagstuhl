@@ -21,7 +21,7 @@ public class RunSimpleTest {
         int levelId = 0;
         String map = "examples/gridphysics/" + gameName+ ".txt";
         String level = "examples/gridphysics/" + gameName+ "_lvl" + levelId + ".txt";
-        String playerClassString = "tracks.singlePlayer.simple.sampleRandom.Agent";
+        String playerClassString = "tracks.gameDesign.logger.Agent";
         String action_file = "action_log.txt";
         System.out.println("Map: " + map);
         System.out.println("level: " + level);
@@ -30,7 +30,7 @@ public class RunSimpleTest {
 
         int seed = new Random().nextInt();
 
-        double[] gameScore = ArcadeMachine.runOneGame(map, level, false, playerClassString, action_file, seed, 0);
+        double[] gameScore = ArcadeMachine.runOneGame(map, level, true, playerClassString, action_file, seed, 0);
     }
 
     

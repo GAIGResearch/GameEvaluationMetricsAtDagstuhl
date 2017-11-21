@@ -1394,7 +1394,7 @@ public abstract class Game {
 				if (intId == -1) {
 					// With no sprite, the effect is independent from particular
 					// sprites.
-					ef.execute(null, null, this);
+					ef.executeEnhanced(null, null, this);
 					exec = true;
 
 					// Affect score for all players:
@@ -1562,7 +1562,7 @@ public abstract class Game {
 
 	private void executeEffect(Effect ef, VGDLSprite s1, VGDLSprite s2) {
 		// There is a collision. Apply the effect.
-		ef.execute(s1, s2, this);
+		ef.executeEnhanced(s1, s2, this);
 
 		// Affect score:
 		if (ef.applyScore) {

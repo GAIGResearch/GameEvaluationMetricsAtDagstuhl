@@ -5,25 +5,37 @@
  */
 package metrics;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author vv
  */
 public class SampleLogger implements GameLogger {
 
+    ArrayList<Integer> actionList;
+
     @Override
     public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        actionList.add(actions[0]);
+        return this;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public GameLogger startGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        actionList = new ArrayList<>();
+        return this;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public GameLogger terminateGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double entropy = metrics.Utils.entropy(actionList);
+        System.out.println("[LOGGER] Entropy of actions: " + entropy);
+        return this;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
