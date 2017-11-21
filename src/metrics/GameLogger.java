@@ -8,17 +8,18 @@ package metrics;
 public interface GameLogger {
 
 
+    GameLogger startGame();
 
-
-
-
+    GameLogger terminateGame();
 
     GameLogger logAction(AbstractGameState state,
                           int[] actions,
                           GameEvent[] events);
 
-
 //    public void logAction(AbstractGameState state,
 //                          InputEvent[] actions,
 //                          GameEvent[] events);
+
+    
+
 }
