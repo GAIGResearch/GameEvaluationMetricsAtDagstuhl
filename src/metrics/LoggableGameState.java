@@ -9,6 +9,9 @@ public interface LoggableGameState {
 
     int nActions();
 
+    // Id of all actions
+    int[] allActions();
+
     double getScore();
 
     boolean isTerminal();
