@@ -12,4 +12,4 @@ mkdir -p ${build_folder}
 find ${src_folder} -name "*.java" > sources.txt
 shell_dir=`dirname "$(find . -type f -name runClient_nocompile.sh | head -1)"`
 javac -d ${build_folder} @sources.txt
-java -classpath ${build_folder} metrics.RunSimpleTest
+java -classpath ${build_folder} metrics.RunSimpleTest ../../

@@ -1,6 +1,8 @@
 package metrics;
 
 
+import java.util.Map;
+
 public interface LoggableGameState {
     
     // LoggableGameState copy();
@@ -15,6 +17,8 @@ public interface LoggableGameState {
     double getScore();
 
     boolean isTerminal();
+
+    Map<String, Integer> getGameObjects();
 
     // List<Object> getGameState();
 
