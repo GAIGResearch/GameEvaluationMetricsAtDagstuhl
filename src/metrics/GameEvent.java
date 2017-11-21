@@ -1,4 +1,4 @@
-package src.metrics;
+package metrics;
 
 public class GameEvent {
 }
