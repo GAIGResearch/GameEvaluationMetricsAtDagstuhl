@@ -62,33 +62,28 @@ public class Utils {
     }
 
     public static double[] differentialArray(ArrayList<Double> entries) {
-        double[] diff = new double[entries.size()];
-        diff[0] = 0.0;
-        for (int i=1; i<diff.length; i++) {
-            diff[i] = entries.get(i) - entries.get(i-1);
+        int nbEntries = entries.size();
+        double[] diff = new double[nbEntries];
+        if (nbEntries > 0) {
+            diff[0] = 0.0;
+            if (nbEntries > 1) {
+                for (int i = 1; i < diff.length; i++) {
+                    diff[i] = entries.get(i) - entries.get(i - 1);
+                }
+            }
         }
         return diff;
     }
-
-//    public static void printLogMsg(String msg) {
-//        System.out.println(LOG + msg);
-//    }
-//
-//    public static void printLogMsg(int msg) {
-//        System.out.println(LOG + msg);
-//    }
-//
-//    public static void printLogMsg(double msg) {
-//        System.out.println(LOG + msg);
-//    }
 
     public static String printLogMsg(Object msg) {
         String str = "";
         if (msg instanceof double[]) {
             double[] array = (double[]) msg;
-            str += array[0];
-            for (int i=1; i<array.length; i++) {
-                str += "," + array[i];
+            if (array.length>0) {
+                str += array[0];
+                for (int i = 1; i < array.length; i++) {
+                    str += "," + array[i];
+                }
             }
             return str;
         }
