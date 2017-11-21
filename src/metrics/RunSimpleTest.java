@@ -30,7 +30,7 @@ public class RunSimpleTest {
 
         int seed = new Random().nextInt();
 
-        double[] gameScore = ArcadeMachine.runOneGame(map, level, true, playerClassString, action_file, seed, 0);
+        double[] gameScore = ArcadeMachine.runOneGame(map, level, false, playerClassString, action_file, seed, 0);
     }
 
     
