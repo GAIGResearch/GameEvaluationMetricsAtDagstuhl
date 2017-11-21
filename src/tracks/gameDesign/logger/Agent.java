@@ -16,10 +16,10 @@ import java.util.ArrayList;
  */
 public class Agent extends AbstractPlayer {
 
-
     private tracks.singlePlayer.advanced.sampleMCTS.Agent actualAgent;
 
     private GameLogger logger;
+    GVGAILoggableGameState gvgaiLoggableGameState;
 
     /**
      * initialize all variables for the agent
@@ -30,6 +30,7 @@ public class Agent extends AbstractPlayer {
         actualAgent = new tracks.singlePlayer.advanced.sampleMCTS.Agent(stateObs, elapsedTimer);
         logger = new SampleLogger();
         logger.startGame();
+        gvgaiLoggableGameState = new GVGAILoggableGameState();
     }
 
     /**
@@ -44,9 +45,10 @@ public class Agent extends AbstractPlayer {
         Types.ACTIONS a = actualAgent.act(stateObs, elapsedTimer);
 
         /// LOGGING ACTIONS.
-        logger.logAction(null, new int[]{a.ordinal()}, null);
-        double score = stateObs.getGameScore();
-        logger.logScore(null, new double[]{score}, null);
+        gvgaiLoggableGameState.setGameState(stateObs);
+        logger.logAction(gvgaiLoggableGameState, new int[]{a.ordinal()}, null);
+        // double score = stateObs.getGameScore();
+        // logger.logScore(null, new double[]{score}, null);
 
         /// LOGGING GAME EVENTS
         logEvents(stateObs);
