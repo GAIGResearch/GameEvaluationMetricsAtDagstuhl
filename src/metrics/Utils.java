@@ -62,6 +62,7 @@ public class Utils {
     }
 
     public static double[] differentialArray(ArrayList<Double> entries) {
+
         double[] diff = new double[entries.size()];
         diff[0] = 0.0;
         for (int i=1; i<diff.length; i++) {
