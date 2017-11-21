@@ -6,6 +6,7 @@
 package metrics;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import metrics.plot.MetricVisualiser;
 
@@ -16,6 +17,11 @@ import metrics.plot.MetricVisualiser;
 public class SampleLogger implements GameLogger {
 
     ArrayList<Integer> actionList;
+    ArrayList<GameEvent[]> gameEvents;
+
+
+
+    ArrayList<Double> scoreHistory;
 
     ArrayList<Double> scores = new ArrayList();
     
@@ -24,6 +30,7 @@ public class SampleLogger implements GameLogger {
     @Override
     public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
         actionList.add(actions[0]);
+
         if (state != null){
             scores.add(state.getScore());  
         }
@@ -31,24 +38,64 @@ public class SampleLogger implements GameLogger {
         	scores.add(Math.random() * 10);
         }
         visualiser.update(scores);
+
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public GameLogger logEvents(GameEvent[] gameEventsNow)
+    {
+        gameEvents.add(gameEventsNow);
+        return this;
+    }
+
     @Override
     public GameLogger startGame() {
-        actionList = new ArrayList<>();
+        resetRecords();
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public GameLogger terminateGame() {
+
+
+        /// PRINTING ENTROPY
         double entropy = metrics.Utils.entropy(actionList);
         System.out.println("[LOGGER] Entropy of actions: " + entropy);
 //        MetricVisualiser visualiser = Met
+
+        Utils.printLogMsg("Entropy of actions: " + entropy);
+
+        double[] scoreDiff = metrics.Utils.differentialArray(scoreHistory);
+        Utils.printLogMsgWithTag("Score changes per game tick: ", scoreDiff);
+
+
+
+        /// PRINTING GAME EVENTS
+        int timeSteps = 0;
+        for(GameEvent[] ges : gameEvents)
+        {
+            if(ges != null)
+            {
+                System.out.print("[LOGGER] " + timeSteps + " ");
+                for(GameEvent ge : ges) System.out.print(ge.name + " at position " + ge.avatarPosition);
+                System.out.println();
+            }
+            timeSteps++;
+        }
+
+        System.out.println(new FrequencyMap().add(scoreDiff).getMap());
+
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    public void resetRecords() {
+        actionList = new ArrayList<>();
+        scoreHistory = new ArrayList<>();
+        gameEvents = new ArrayList<>();
+    }
+
+
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import core.game.ForwardModel;
 import core.vgdl.VGDLFactory;
 import core.vgdl.VGDLSprite;
 import core.content.InteractionContent;
@@ -89,7 +90,9 @@ public abstract class Effect{
      */
     public void executeEnhanced(VGDLSprite sprite1, VGDLSprite sprite2, Game game)
     {
-        eventCount++;
+        if(!(game instanceof ForwardModel))
+            eventCount++;
+
         this.execute(sprite1, sprite2, game);
     }
 
@@ -239,6 +242,7 @@ public abstract class Effect{
         //parameters from the object.
         VGDLFactory.GetInstance().parseParameters(content, this);
         hashCode = content.hashCode;
+        effectName = content.line;
     }
 
     /**

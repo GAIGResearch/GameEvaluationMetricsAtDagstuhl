@@ -487,4 +487,10 @@ public class StateObservation {
         return false;
     }
 
+
+    public ArrayList<String> getEventsThisTick()
+    {
+        return model.eventsThisTick;
+    }
+
 }
