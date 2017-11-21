@@ -2,7 +2,7 @@ package metrics;
 
 
 public interface AbstractGameState {
-
+    
     AbstractGameState copy();
 
     AbstractGameState next(int[] actions);
