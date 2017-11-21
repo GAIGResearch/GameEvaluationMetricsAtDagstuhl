@@ -1,7 +1,11 @@
 package metrics;
 
 
+import tools.Vector2d;
+
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Vector;
 
 public interface LoggableGameState {
     
