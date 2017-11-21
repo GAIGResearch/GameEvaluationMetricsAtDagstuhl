@@ -1,11 +1,11 @@
 package metrics;
 
 
-public interface AbstractGameState {
+public interface LoggableGameState {
     
-    AbstractGameState copy();
+    LoggableGameState copy();
 
-    AbstractGameState next(int[] actions);
+    LoggableGameState next(int[] actions);
 
     int nActions();
 

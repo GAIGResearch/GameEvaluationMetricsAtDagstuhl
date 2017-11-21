@@ -12,7 +12,7 @@ package metrics;
 public class SampleLogger implements GameLogger {
 
     @Override
-    public GameLogger logAction(AbstractGameState state, int[] actions, GameEvent[] events) {
+    public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
