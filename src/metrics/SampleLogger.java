@@ -68,7 +68,7 @@ public class SampleLogger implements GameLogger {
             if(ges != null)
             {
                 System.out.print("[LOGGER] " + timeSteps + " ");
-                for(GameEvent ge : ges) System.out.print(ge.name + "; " + ge.avatarPosition);
+                for(GameEvent ge : ges) System.out.print(ge.name + " at position " + ge.avatarPosition);
                 System.out.println();
             }
             timeSteps++;
