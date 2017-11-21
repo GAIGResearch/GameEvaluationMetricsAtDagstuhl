@@ -8,6 +8,6 @@ public class GameObject {
     Vector2d position;
 
     public GameObject() {
-        
+
     }
 }

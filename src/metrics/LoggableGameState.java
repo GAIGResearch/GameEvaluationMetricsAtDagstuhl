@@ -1,6 +1,12 @@
 package metrics;
 
 
+import tools.Vector2d;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Vector;
+
 public interface LoggableGameState {
     
     // LoggableGameState copy();
@@ -15,6 +21,8 @@ public interface LoggableGameState {
     double getScore();
 
     boolean isTerminal();
+
+    Map<String, Integer> getGameObjects();
 
     // List<Object> getGameState();
 

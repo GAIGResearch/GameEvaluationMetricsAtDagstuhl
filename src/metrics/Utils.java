@@ -17,8 +17,8 @@ public class Utils {
             return a_value;
     }
 
-    // Calculate entropy
-    public static double entropy(double[] entries) {
+    // Calculate normalised entropy
+    public static double normalisedEntropy(double[] entries) {
         int nbEntries = entries.length;
         HashMap<Double,Integer> occurrences = new HashMap<>();
         double key;
@@ -35,6 +35,55 @@ public class Utils {
         for (int value : occurrences.values()) {
             double p = (double) value/nbEntries;
             entropy -= p * Math.log(p);
+        }
+        return entropy / Math.log(occurrences.size());
+    }
+
+    // Calculate normalised entropy
+    public static double normalisedEntropy(ArrayList<Integer> entries) {
+        int nbEntries = entries.size();
+        HashMap<Integer,Integer> occurrences = new HashMap<>();
+        int key;
+        for (int i=0; i<nbEntries; i++) {
+            key = entries.get(i);
+            if (occurrences.get(key) == null) {
+                occurrences.put(key, 1);
+            } else {
+                int value = occurrences.get(key);
+                occurrences.replace(key, value, value + 1);
+            }
+        }
+        double entropy = 0.0;
+        for (int value : occurrences.values()) {
+            double p = (double) value/nbEntries;
+            entropy -= p * Math.log(p);
+
+        }
+        return entropy / Math.log(occurrences.size());
+    }
+
+    // Calculate entropy
+    public static double entropy(double[] entries) {
+        int nbEntries = entries.length;
+        HashMap<Double,Integer> occurrences = new HashMap<>();
+        double key;
+        for (int i=0; i<nbEntries; i++) {
+            key = entries[i];
+            if (occurrences.get(key) == null) {
+                occurrences.put(key, 1);
+            } else {
+                int value = occurrences.get(key);
+                occurrences.replace(key, value, value + 1);
+            }
+        }
+        double entropy = 0.0;
+        if (!occurrences.isEmpty()) {
+            for (int value : occurrences.values()) {
+                double p = (double) value / nbEntries;
+                entropy -= p * Math.log(p);
+            }
+        } else {
+            System.err.println("Empty array for calculating entropy");
         }
         return entropy;
     }
