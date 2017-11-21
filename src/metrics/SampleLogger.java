@@ -6,6 +6,7 @@
 package metrics;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 public class SampleLogger implements GameLogger {
 
     ArrayList<Integer> actionList;
+    ArrayList<GameEvent[]> gameEvents;
+
 
     ArrayList<Double> scoreHistory;
 
@@ -22,6 +25,12 @@ public class SampleLogger implements GameLogger {
         actionList.add(actions[0]);
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public GameLogger logEvents(GameEvent[] gameEventsNow)
+    {
+        gameEvents.add(gameEventsNow);
+        return this;
     }
 
     @Override
@@ -40,11 +49,29 @@ public class SampleLogger implements GameLogger {
 
     @Override
     public GameLogger terminateGame() {
+
+
+        /// PRINTING ENTROPY
         double entropy = metrics.Utils.entropy(actionList);
         Utils.printLogMsg("Entropy of actions: " + entropy);
 
         double[] scoreDiff = metrics.Utils.differentialArray(scoreHistory);
         Utils.printLogMsgWithTag("Score changes per game tick: ", scoreDiff);
+
+
+
+        /// PRINTING GAME EVENTS
+        int timeSteps = 0;
+        for(GameEvent[] ges : gameEvents)
+        {
+            if(ges != null)
+            {
+                System.out.print("[LOGGER] " + timeSteps + " ");
+                for(GameEvent ge : ges) System.out.print(ge.name + ";");
+                System.out.println();
+            }
+            timeSteps++;
+        }
 
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -53,6 +80,7 @@ public class SampleLogger implements GameLogger {
     public void resetRecords() {
         actionList = new ArrayList<>();
         scoreHistory = new ArrayList<>();
+        gameEvents = new ArrayList<>();
     }
 
 

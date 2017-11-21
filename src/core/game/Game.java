@@ -248,6 +248,12 @@ public abstract class Game {
 	 */
 	protected Types.ACTIONS[] avatarLastAction;
 
+	/**
+	 * Events that were triggered this tick.
+	 */
+	ArrayList<String> eventsThisTick;
+
+
 	public int no_players = 1; // default to single player
 
 	public int no_counters = 0; // default no counters
@@ -1135,6 +1141,21 @@ public abstract class Game {
 			}
 		}
 
+
+//		for (Integer intId : definedEOSEffects)
+//			for (Effect ef : eosEffects[intId])
+//				if (ef.eventCount > 0)
+//					System.out.println("[" + ef.eventCount + "] " + ef.effectName);
+//
+//		for (Pair<Integer, Integer> p : definedEffects)
+//			for (Effect ef : collisionEffects[p.first][p.second])
+//				if (ef.eventCount > 0)
+//					System.out.println("[" + ef.eventCount + "] " + ef.effectName);
+
+
+
+
+
 		return scores;
 	}
 
@@ -1379,6 +1400,9 @@ public abstract class Game {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void eventHandling() {
+
+		eventsThisTick = new ArrayList<String>();
+
 		// Array to indicate that the sprite type has no representative in
 		// collisions.
 		boolean noSprites[] = new boolean[spriteGroups.length];
@@ -1563,6 +1587,7 @@ public abstract class Game {
 	private void executeEffect(Effect ef, VGDLSprite s1, VGDLSprite s2) {
 		// There is a collision. Apply the effect.
 		ef.executeEnhanced(s1, s2, this);
+		eventsThisTick.add(ef.effectName);
 
 		// Affect score:
 		if (ef.applyScore) {
