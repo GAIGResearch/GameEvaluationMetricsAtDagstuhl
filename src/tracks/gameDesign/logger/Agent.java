@@ -72,7 +72,8 @@ public class Agent extends AbstractPlayer {
             int i = 0;
 
             for (String event : eventsThisTick) {
-                GameEvent ge = new GameEvent(event);
+//                GameEvent ge = new GameEvent(event);
+                GameEvent ge = new GameEvent(event, stateObs.getGameTick(), stateObs.getAvatarPosition());
                 events[i] = ge;
                 i++;
             }
