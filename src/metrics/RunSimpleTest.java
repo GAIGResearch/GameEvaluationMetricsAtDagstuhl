@@ -5,9 +5,12 @@
  */
 package metrics;
 
-import java.util.Random;
-import tracks.ArcadeMachine;
+import static core.competition.CompetitionParameters.IMG_PATH;
 
+import java.util.Random;
+
+import metrics.plot.MetricVisualiser;
+import tracks.ArcadeMachine;
 import static core.competition.CompetitionParameters.IMG_PATH;
 import static core.competition.CompetitionParameters.MAX_TIMESTEPS;
 
@@ -31,6 +34,7 @@ public class RunSimpleTest {
         String map = gamesDir + "examples/gridphysics/" + gameName+ ".txt";
         String level = gamesDir + "examples/gridphysics/" + gameName+ "_lvl" + levelId + ".txt";
         String playerClassString = "tracks.gameDesign.logger.Agent";
+
         String action_file = "action_log.txt";
         System.out.println("Map: " + map);
         System.out.println("level: " + level);

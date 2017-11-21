@@ -9,6 +9,7 @@ import java.lang.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FileLogger implements GameLogger{
 
@@ -20,6 +21,11 @@ public class FileLogger implements GameLogger{
     {
         gameEvents.add(gameEventsNow);
         return this;
+    }
+
+    @Override
+    public GameLogger logObjectDensity(Map<String, Integer> objects) {
+        return null;
     }
 
     @Override
@@ -42,14 +48,6 @@ public class FileLogger implements GameLogger{
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public GameLogger logScore(LoggableGameState state, double[] scores, GameEvent[] events) {
-        scoreHistory.add(scores[0]);
-        return this;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
     @Override
     public GameLogger startGame() {
