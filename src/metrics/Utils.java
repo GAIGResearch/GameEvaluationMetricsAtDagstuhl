@@ -77,9 +77,13 @@ public class Utils {
             }
         }
         double entropy = 0.0;
-        for (int value : occurrences.values()) {
-            double p = (double) value/nbEntries;
-            entropy -= p * Math.log(p);
+        if (!occurrences.isEmpty()) {
+            for (int value : occurrences.values()) {
+                double p = (double) value / nbEntries;
+                entropy -= p * Math.log(p);
+            }
+        } else {
+            System.err.println("Empty array for calculating entropy");
         }
         return entropy;
     }
