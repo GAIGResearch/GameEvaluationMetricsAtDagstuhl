@@ -3,6 +3,7 @@ package tracks.singlePlayer.advanced.sampleMCTS;
 import java.util.Random;
 
 import core.game.StateObservation;
+import static metrics.Utils.entropy;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
 import tools.Utils;
@@ -256,7 +257,7 @@ public class SingleTreeNode
         return selected;
     }
 
-     public double decisiveness() {
+     public double decisivenessDeprecated() {
         double totalVisits = 0;
         double bestValue = -Double.MAX_VALUE;
         double secondBest = -Double.MAX_VALUE;
@@ -286,6 +287,19 @@ public class SingleTreeNode
         }else{
             return (bestValue-secondBest)/totalVisits;   
         }
+    }
+     
+    public double decisiveness(){
+        double[] visitCounts = new double[children.length];
+        for (int i=0; i<children.length; i++) {
+
+            if(children[i] != null)
+            {
+                visitCounts[i] = children[i].nVisits;
+
+            }
+        }
+        return entropy(visitCounts);
     }
     
     
