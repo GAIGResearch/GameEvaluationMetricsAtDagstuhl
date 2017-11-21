@@ -75,7 +75,10 @@ public class SampleLogger implements GameLogger {
             timeSteps++;
         }
 
+        System.out.println();
+        System.out.println("Score frequency distribution");
         System.out.println(new FrequencyMap().add(scoreDiff).getMap());
+        System.out.println();
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
