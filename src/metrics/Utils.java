@@ -43,22 +43,17 @@ public class Utils {
         int key;
         for (int i=0; i<nbEntries; i++) {
             key = entries.get(i);
-            System.out.println("key is " + key );
             if (occurrences.get(key) == null) {
                 occurrences.put(key, 1);
             } else {
                 int value = occurrences.get(key);
-
-                System.out.println("key is " + key + " value is " + value);
-
                 occurrences.replace(key, value, value + 1);
             }
         }
         double entropy = 0.0;
         for (int value : occurrences.values()) {
-            System.out.println(entropy);
-            double p =
-            entropy -= (double) (value/nbEntries) * Math.log((double) (value/nbEntries)) / Math.log(2.0);
+            double p = (double) value/nbEntries;
+            entropy -= p * Math.log(p);
 
         }
         return entropy;
