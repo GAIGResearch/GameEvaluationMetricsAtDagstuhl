@@ -20,6 +20,9 @@ public interface GameLogger {
 
     GameLogger logEvents(GameEvent[] gameEventsNow);
 
+    
+    GameLogger logAgentData(LoggableGameState state, AgentData agentData);
+
     GameLogger logObjectDensity(Map<String, Integer> objects);
 
 //    public void logAction(AbstractGameState state,

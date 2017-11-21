@@ -3,9 +3,12 @@ package tracks.gameDesign.logger;
 import core.game.StateObservation;
 import metrics.LoggableGameState;
 
+import java.util.Map;
+
 public class GVGAILoggableGameState implements LoggableGameState {
 
     StateObservation stateObservation;
+    Map<String, Integer> gameObjects;
 
     LoggableGameState setGameState(StateObservation stateObservation) {
         this.stateObservation = stateObservation;
@@ -31,4 +34,15 @@ public class GVGAILoggableGameState implements LoggableGameState {
     public boolean isTerminal() {
         return stateObservation.isGameOver();
     }
+
+    @Override
+    public Map<String, Integer> getGameObjects() {
+        return this.gameObjects;
+    }
+
+    public void setGameObjects(Map<String, Integer> gameObjects)
+    {
+        this.gameObjects = gameObjects;
+    }
+
 }

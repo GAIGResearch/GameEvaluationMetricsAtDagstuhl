@@ -16,6 +16,7 @@ public class FileLogger implements GameLogger{
     private ArrayList<Integer> actionList;
     private ArrayList<GameEvent[]> gameEvents;
     private ArrayList<Double> scoreHistory;
+    ArrayList<Double> decisivenessHistory;
 
     public GameLogger logEvents(GameEvent[] gameEventsNow)
     {
@@ -50,6 +51,13 @@ public class FileLogger implements GameLogger{
     }
 
     @Override
+    public GameLogger logAgentData(LoggableGameState state, AgentData agentData) {
+        decisivenessHistory.add(agentData.getDecisiveness());
+        return this;
+    }
+    
+    
+    @Override
     public GameLogger startGame() {
         actionList = new ArrayList<>();
         return this;
@@ -68,5 +76,6 @@ public class FileLogger implements GameLogger{
         actionList = new ArrayList<>();
         scoreHistory = new ArrayList<>();
         gameEvents = new ArrayList<>();
+        decisivenessHistory = new ArrayList<>();
     }
 }
