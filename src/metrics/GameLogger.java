@@ -16,6 +16,10 @@ public interface GameLogger {
                           int[] actions,
                           GameEvent[] events);
 
+    GameLogger logScore(LoggableGameState state,
+                         double[] scores,
+                         GameEvent[] events);
+
 //    public void logAction(AbstractGameState state,
 //                          InputEvent[] actions,
 //                          GameEvent[] events);

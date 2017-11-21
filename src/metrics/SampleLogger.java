@@ -15,6 +15,8 @@ public class SampleLogger implements GameLogger {
 
     ArrayList<Integer> actionList;
 
+    ArrayList<Double> scoreHistory;
+
     @Override
     public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
         actionList.add(actions[0]);
@@ -23,8 +25,15 @@ public class SampleLogger implements GameLogger {
     }
 
     @Override
+    public GameLogger logScore(LoggableGameState state, double[] scores, GameEvent[] events) {
+        scoreHistory.add(scores[0]);
+        return this;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
     public GameLogger startGame() {
-        actionList = new ArrayList<>();
+        resetRecords();
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -32,9 +41,19 @@ public class SampleLogger implements GameLogger {
     @Override
     public GameLogger terminateGame() {
         double entropy = metrics.Utils.entropy(actionList);
-        System.out.println("[LOGGER] Entropy of actions: " + entropy);
+        Utils.printLogMsg("Entropy of actions: " + entropy);
+
+        double[] scoreDiff = metrics.Utils.differentialArray(scoreHistory);
+        Utils.printLogMsgWithTag("Score changes per game tick: ", scoreDiff);
+
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    public void resetRecords() {
+        actionList = new ArrayList<>();
+        scoreHistory = new ArrayList<>();
+    }
+
+
 }
