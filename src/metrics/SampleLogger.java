@@ -5,10 +5,7 @@
  */
 package metrics;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import metrics.plot.MetricVisualiser;
 
@@ -19,6 +16,8 @@ import metrics.plot.MetricVisualiser;
 public class SampleLogger implements GameLogger {
 
     ArrayList<Integer> actionList;
+//    HashMap<Integer, Integer> actionMap;
+
     ArrayList<GameEvent[]> gameEvents;
     ArrayList<Double> decisivenessHistory;
     ArrayList<Double> convergenceHistory;
@@ -30,15 +29,19 @@ public class SampleLogger implements GameLogger {
     ArrayList<Double> scores = new ArrayList();
     
     MetricVisualiser visualiser = new MetricVisualiser();
+//    MetricVisualiser visualiserForAction = new MetricVisualiser();
     
     @Override
     public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
         actionList.add(actions[0]);
-
+//        if (actionMap.containsKey(actions[0])) {
+//            actionMap.put(actions[0], actionMap.get(actions[0])+1);
+//        } else {
+//            actionMap.put(actions[0], 1);
+//        }
         if (state != null){
-            scores.add(state.getScore());  
+            visualiser.update(state);
         }
-        visualiser.update(scores);
 
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -78,13 +81,13 @@ public class SampleLogger implements GameLogger {
     private void debug()
     {
         /// PRINTING ENTROPY
-        double entropy = metrics.Utils.entropy(actionList);
-        System.out.println("[LOGGER] Entropy of actions: " + entropy);
+        double normalisedEntropy = metrics.Utils.normalisedEntropy(actionList);
+        System.out.println("[LOGGER] Entropy of actions: " + normalisedEntropy);
 //        MetricVisualiser visualiser = Met
 
-        Utils.printLogMsg("Entropy of actions: " + entropy);
+        Utils.printLogMsg("Entropy of actions: " + normalisedEntropy);
 
-        double[] scoreDiff = metrics.Utils.differentialArray(scoreHistory);
+        double[] scoreDiff = metrics.Utils.differentialArray(scores);
         Utils.printLogMsgWithTag("Score changes per game tick: ", scoreDiff);
         
         System.out.print("Decisiveness: ");
