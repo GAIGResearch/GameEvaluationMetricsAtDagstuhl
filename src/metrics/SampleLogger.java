@@ -73,7 +73,7 @@ public class SampleLogger implements GameLogger {
     @Override
     public GameLogger terminateGame() {
 
-        debug();
+        //debug();
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
