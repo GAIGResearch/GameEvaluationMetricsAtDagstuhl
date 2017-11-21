@@ -23,6 +23,7 @@ public class SampleLogger implements GameLogger {
     @Override
     public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
         actionList.add(actions[0]);
+        scoreHistory.add(state.getScore());
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
