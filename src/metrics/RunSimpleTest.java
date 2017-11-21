@@ -8,6 +8,8 @@ package metrics;
 import java.util.Random;
 import tracks.ArcadeMachine;
 
+import static core.competition.CompetitionParameters.IMG_PATH;
+
 /**
  *
  * @author vv
@@ -20,8 +22,10 @@ public class RunSimpleTest {
         String gameName = "aliens";
         int levelId = 0;
         String gamesDir = "";
-        if (args.length>0) {
+        if (args.length==1) {
             gamesDir = args[0];
+            IMG_PATH = gamesDir +  "sprites/";
+
         }
         String map = gamesDir + "examples/gridphysics/" + gameName+ ".txt";
         String level = gamesDir + "examples/gridphysics/" + gameName+ "_lvl" + levelId + ".txt";
