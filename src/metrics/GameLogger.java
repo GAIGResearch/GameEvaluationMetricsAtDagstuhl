@@ -7,9 +7,13 @@ package src.metrics;
  *  */
 public interface GameLogger {
 
+
+
+
     
 
-    public void logAction(AbstractGameState state,
+
+    GameLogger logAction(AbstractGameState state,
                           int[] actions,
                           GameEvent[] events);
 
