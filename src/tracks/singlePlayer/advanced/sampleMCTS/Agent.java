@@ -66,5 +66,10 @@ public class Agent extends AbstractPlayer {
         //... and return it.
         return actions[action];
     }
+    
+    public double getDecisiveness(){
+        return mctsPlayer.getDecisiveness();
+    }
+
 
 }

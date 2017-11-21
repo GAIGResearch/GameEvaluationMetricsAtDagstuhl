@@ -11,7 +11,10 @@ import ontology.Types;
 import tools.ElapsedCpuTimer;
 
 import javax.swing.plaf.nimbus.State;
+import java.util.ArrayList;
+import metrics.AgentData;
 import java.util.*;
+
 
 /**
  * Created by dperez on 21/11/2017.
@@ -54,11 +57,15 @@ public class Agent extends AbstractPlayer {
         logEvents(stateObs);
 
         /// LOGGING ACTIONS.
+        AgentData agentData = new AgentData();
+        agentData.setDecisiveness(actualAgent.getDecisiveness());
+        logger.logAgentData(null, agentData);
+
+
         gvgaiLoggableGameState.setGameState(stateObs);
         logger.logAction(gvgaiLoggableGameState, new int[]{a.ordinal()}, null);
         // double score = stateObs.getGameScore();
         // logger.logScore(null, new double[]{score}, null);
-
 
         return a;
     }

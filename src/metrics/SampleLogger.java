@@ -20,6 +20,7 @@ public class SampleLogger implements GameLogger {
 
     ArrayList<Integer> actionList;
     ArrayList<GameEvent[]> gameEvents;
+    ArrayList<Double> decisivenessHistory;
     ArrayList<Map<String, Integer>> gameObjects;
 
 
@@ -84,6 +85,12 @@ public class SampleLogger implements GameLogger {
 
         double[] scoreDiff = metrics.Utils.differentialArray(scoreHistory);
         Utils.printLogMsgWithTag("Score changes per game tick: ", scoreDiff);
+        
+        System.out.print("Decisiveness: ");
+        for(double dec: decisivenessHistory){
+            System.out.print(dec + ", ");
+        }
+        System.out.print("\n");
 
 
         /// PRINTING GAME OBJECTS
@@ -131,6 +138,13 @@ public class SampleLogger implements GameLogger {
         actionList = new ArrayList<>();
         scoreHistory = new ArrayList<>();
         gameEvents = new ArrayList<>();
+        decisivenessHistory = new ArrayList<>();
+    }
+
+    @Override
+    public GameLogger logAgentData(LoggableGameState state, AgentData agentData) {
+        decisivenessHistory.add(agentData.getDecisiveness());
+        return this;
     }
 
 }

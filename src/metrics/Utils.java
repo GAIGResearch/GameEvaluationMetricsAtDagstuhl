@@ -33,7 +33,8 @@ public class Utils {
         }
         double entropy = 0.0;
         for (int value : occurrences.values()) {
-            entropy -= value/nbEntries * Math.log(value/nbEntries) / Math.log(2);
+            double p = (double) value/nbEntries;
+            entropy -= p * Math.log(p);
         }
         return entropy;
     }
