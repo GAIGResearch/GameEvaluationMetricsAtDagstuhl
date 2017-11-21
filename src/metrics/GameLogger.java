@@ -12,7 +12,7 @@ public interface GameLogger {
 
     GameLogger terminateGame();
 
-    GameLogger logAction(AbstractGameState state,
+    GameLogger logAction(LoggableGameState state,
                           int[] actions,
                           GameEvent[] events);
 
