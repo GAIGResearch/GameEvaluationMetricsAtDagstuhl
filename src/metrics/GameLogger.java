@@ -1,4 +1,4 @@
-package src.metrics;
+package metrics;
 
 
 /**
@@ -10,7 +10,7 @@ public interface GameLogger {
 
 
 
-    
+
 
 
     GameLogger logAction(AbstractGameState state,
