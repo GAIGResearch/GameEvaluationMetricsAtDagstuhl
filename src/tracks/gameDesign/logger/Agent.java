@@ -13,6 +13,7 @@ import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import core.vgdl.VGDLRegistry;
+import metrics.OutcomeUncertainty;
 
 
 
@@ -22,6 +23,7 @@ import core.vgdl.VGDLRegistry;
 public class Agent extends AbstractPlayer {
 
     private tracks.singlePlayer.advanced.sampleMCTS.Agent actualAgent;
+    private OutcomeUncertainty outcomeUncertainty;
 
     GVGAILoggableGameState gvgaiLoggableGameState;
 
@@ -33,6 +35,7 @@ public class Agent extends AbstractPlayer {
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer){
         actualAgent = new tracks.singlePlayer.advanced.sampleMCTS.Agent(stateObs, elapsedTimer);
         gvgaiLoggableGameState = new GVGAILoggableGameState();
+        outcomeUncertainty = new OutcomeUncertainty(15, 20);
     }
 
     /**
@@ -46,7 +49,7 @@ public class Agent extends AbstractPlayer {
 
         Types.ACTIONS a = actualAgent.act(stateObs, elapsedTimer);
 
-        /// LOGGING OBJECT DENSITIY
+        // LOGGING OBJECT DENSITIY
         HashMap<String, Integer> thisCountMap = logObjectDensity(stateObs);
         gvgaiLoggableGameState.setGameObjects(thisCountMap);
 
@@ -57,6 +60,9 @@ public class Agent extends AbstractPlayer {
 
 
         gvgaiLoggableGameState.setDecisiveness(actualAgent.getDecisiveness());
+        gvgaiLoggableGameState.setConvergence(actualAgent.getConvergence());
+        gvgaiLoggableGameState.setOutcomeUncertaintyScore(outcomeUncertainty.computeUncertainty(stateObs, true));
+        gvgaiLoggableGameState.setOutcomeUncertaintyState(outcomeUncertainty.computeUncertainty(stateObs, false));
 
         gvgaiLoggableGameState.setGameState(stateObs);
         gvgaiLoggableGameState.setActions(new int[]{a.ordinal()});

@@ -15,9 +15,33 @@ public class GVGAILoggableGameState implements LoggableGameState {
     int[] actions;
 
     private double decisiveness;
+    private double convergence;
+    private double outcomeUncertaintyScore;
+    private double outcomeUncertaintyState;
 
+    public double getConvergence() {
+        return convergence;
+    }
 
+    public void setConvergence(double convergence) {
+        this.convergence = convergence;
+    }
 
+    public double getOutcomeUncertaintyScore() {
+        return outcomeUncertaintyScore;
+    }
+
+    public void setOutcomeUncertaintyScore(double outcomeUncertaintyScore) {
+        this.outcomeUncertaintyScore = outcomeUncertaintyScore;
+    }
+
+    public double getOutcomeUncertaintyState() {
+        return outcomeUncertaintyState;
+    }
+
+    public void setOutcomeUncertaintyState(double outcomeUncertaintyState) {
+        this.outcomeUncertaintyState = outcomeUncertaintyState;
+    }
 
     LoggableGameState setGameState(StateObservation stateObservation) {
         this.stateObservation = stateObservation;
