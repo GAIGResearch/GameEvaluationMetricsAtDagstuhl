@@ -14,9 +14,17 @@ public class GameEvent {
     }
 
     public GameEvent(String name, int time, Vector2d position){
-        this.name = name;
+        this.name = escape(name);
         this.time = time;
         this.avatarPosition = position;
+    }
+
+    private String escape(String name)
+    {
+        name = name.replace(">","");
+        name = name.replace(" ","_");
+        name = name.replace("=","__");
+        return name;
     }
 
     public void setTime(int time) {

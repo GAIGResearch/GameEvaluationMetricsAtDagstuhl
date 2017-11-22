@@ -17,14 +17,14 @@ public class DataWriter {
 
     }
 
-    public String dataToString(Map<String, ArrayList<Double>> data) {
+    public String dataToString(Map<String, ArrayList<Double>> data, Map<String,Integer> groupsMap) {
         String outputStr = "";
         String measureNames = "keys = { ";
 
         for (Map.Entry<String,  ArrayList<Double>> entry : data.entrySet()) {
             String key = entry.getKey();
             measureNames += "\"" + key + "\" ";
-            String entryStr = key + ".groupId = " + 0 + ";\n";  //todo
+            String entryStr = key + ".groupId = " + groupsMap.get(key) + ";\n";  //todo
             entryStr += key + ".data = [";
             ArrayList<Double> values = entry.getValue();
             for (Double value: values) {
@@ -39,12 +39,12 @@ public class DataWriter {
         return outputStr;
     }
 
-    public void printData(Map<String, ArrayList<Double>> data) {
-        System.out.println(dataToString(data));
+    public void printData(Map<String, ArrayList<Double>> data, Map<String,Integer> groupsMap) {
+        System.out.println(dataToString(data, groupsMap));
     }
 
-    public void writeDataToFile(Map<String, ArrayList<Double>> data) {
-        writeStrToFile(dataToString(data));
+    public void writeDataToFile(Map<String, ArrayList<Double>> data, Map<String,Integer> groupsMap) {
+        writeStrToFile(dataToString(data, groupsMap));
         System.out.println("Measure logs saved at " + filename);
     }
 

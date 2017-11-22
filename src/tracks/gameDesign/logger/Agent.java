@@ -97,7 +97,7 @@ public class Agent extends AbstractPlayer {
             }
 
             return events;
-        //}else if(stateObs.getGameTick() > 0){
+
         }
         return null;
     }

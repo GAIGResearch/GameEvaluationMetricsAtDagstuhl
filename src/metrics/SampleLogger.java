@@ -18,6 +18,7 @@ public class SampleLogger implements GameLogger {
 
     Map<String,ArrayList<Double>> measures = new HashMap<>();
     ArrayList<Map<String,ArrayList<Double>>> gameLogs = new ArrayList<>();
+    Map<String,Integer> groupsMap = new HashMap<>();
 
     MetricVisualiser visualiser;
 
@@ -34,6 +35,14 @@ public class SampleLogger implements GameLogger {
 
 
     DataWriter dataWriter = new DataWriter();
+    int SCORE_GROUP_ID = 0;
+    int ACTION_GROUP_ID = 1;
+    int DEC_GROUP_ID = 2;
+    int CONV_GROUP_ID = 3;
+    int OUTSC_GROUP_ID = 4;
+    int OUTST_GROUP_ID = 5;
+    int EVENTS_GROUP_ID = 6;
+    int OBJ_GROUP_ID = 7;
 
 
     public SampleLogger() {}
@@ -47,22 +56,16 @@ public class SampleLogger implements GameLogger {
         measures.get(convField).add(state.getConvergence());
         measures.get(outcomeStField).add(state.getOutcomeUncertaintyState());
         measures.get(outcomeScField).add(state.getOutcomeUncertaintyScore());
-
-        // CODE IN PROGRESS:
-
-        // Manage events
         manageEvents(state);
-
-        // Manage game objects:
         manageObjects(state);
 
-        if (state != null){
-            visualiser.update(state);
-        }
-        gameTick++;
+        //Visualize:
+        visualiser.update(measures, groupsMap);
 
+        gameTick++;
         return this;
     }
+
 
     private void manageEvents(LoggableGameState state)
     {
@@ -75,6 +78,10 @@ public class SampleLogger implements GameLogger {
                 measures.put(ge.name, new ArrayList<>());
                 for(int i = 0; i <= gameTick; ++i)
                     measures.get(ge.name).add(0.0);
+
+                if(!groupsMap.containsKey(ge.name))
+                    groupsMap.put(ge.name, EVENTS_GROUP_ID);
+
             }else{
                 measures.get(ge.name).add(0.0);
             }
@@ -119,6 +126,9 @@ public class SampleLogger implements GameLogger {
                 measures.put(objectOcc.getKey(), new ArrayList<>());
                 for(int i = 0; i <= gameTick; ++i)
                     measures.get(objectOcc.getKey()).add(0.0);
+
+                if(!groupsMap.containsKey(objectOcc.getKey()))
+                    groupsMap.put(objectOcc.getKey(), OBJ_GROUP_ID);
             }
 
             //Log of all objects in this game
@@ -140,7 +150,6 @@ public class SampleLogger implements GameLogger {
         }
     }
 
-
     @Override
     public GameLogger startGame() {
 
@@ -157,6 +166,19 @@ public class SampleLogger implements GameLogger {
         objectsThisGame = new ArrayList<>();
         visualiser = new MetricVisualiser();
 
+        groupsMap.put(scoreField, SCORE_GROUP_ID);
+        groupsMap.put(actionField, ACTION_GROUP_ID);
+        groupsMap.put(decField, DEC_GROUP_ID);
+        groupsMap.put(convField, CONV_GROUP_ID);
+        groupsMap.put(outcomeScField, OUTSC_GROUP_ID);
+        groupsMap.put(outcomeStField, OUTST_GROUP_ID);
+
+        visualiser.addSinglePlots(
+                new int[]{SCORE_GROUP_ID, ACTION_GROUP_ID, DEC_GROUP_ID, CONV_GROUP_ID, OUTSC_GROUP_ID, OUTST_GROUP_ID},
+                new String[]{scoreField, actionField, decField, convField, outcomeScField, outcomeStField});
+        visualiser.addMultiPlots(new int[]{EVENTS_GROUP_ID, OBJ_GROUP_ID},
+                new String[]{"Game Events", "Game Objects Count"});
+
         return this;
     }
 
@@ -170,9 +192,9 @@ public class SampleLogger implements GameLogger {
             System.err.println("[WARNING] \"Measures\" is empty or NULL.");
         }
         System.out.println("[DEBUG] Below print the measures");
-        dataWriter.printData(measures);
+        dataWriter.printData(measures, groupsMap);
         System.out.println("[DEBUG] Above print the measures");
-        dataWriter.writeDataToFile(measures);
+        dataWriter.writeDataToFile(measures, groupsMap);
         System.out.println(gameLogs);
 
         return this;
