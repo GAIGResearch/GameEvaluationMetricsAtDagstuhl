@@ -167,12 +167,12 @@ public class SampleLogger implements GameLogger {
         // since we need to repeat it for everything that we log
         gameLogs.add(measures);
         if (measures == null || measures.isEmpty()) {
-            System.err.println("[WARNING] Measures is empty or null.");
+            System.err.println("[WARNING] \"Measures\" is empty or NULL.");
         }
         System.out.println("[DEBUG] Below print the measures");
         dataWriter.printData(measures);
         System.out.println("[DEBUG] Above print the measures");
-
+        dataWriter.writeDataToFile(measures);
         System.out.println(gameLogs);
 
         return this;

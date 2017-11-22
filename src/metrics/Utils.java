@@ -32,11 +32,19 @@ public class Utils {
             }
         }
         double entropy = 0.0;
-        for (int value : occurrences.values()) {
-            double p = (double) value/nbEntries;
-            entropy -= p * Math.log(p);
+        if (!occurrences.isEmpty()) {
+            if (occurrences.size() > 1) {
+                for (int value : occurrences.values()) {
+                    double p = (double) value/nbEntries;
+                    entropy -= p * Math.log(p);
+                }
+                return entropy / Math.log(occurrences.size());
+            } else {
+                return 1;
+            }
+        } else {
+            return 0;
         }
-        return entropy / Math.log(occurrences.size());
     }
 
     // Calculate normalised entropy
@@ -54,12 +62,20 @@ public class Utils {
             }
         }
         double entropy = 0.0;
-        for (int value : occurrences.values()) {
-            double p = (double) value/nbEntries;
-            entropy -= p * Math.log(p);
+        if (!occurrences.isEmpty()) {
+            if (occurrences.size() > 1) {
+                for (int value : occurrences.values()) {
+                    double p = (double) value / nbEntries;
+                    entropy -= p * Math.log(p);
 
+                }
+                return entropy / Math.log(occurrences.size());
+            } else {
+                return 1;
+            }
+        } else {
+            return 0;
         }
-        return entropy / Math.log(occurrences.size());
     }
 
     // Calculate entropy
@@ -78,9 +94,13 @@ public class Utils {
         }
         double entropy = 0.0;
         if (!occurrences.isEmpty()) {
-            for (int value : occurrences.values()) {
-                double p = (double) value / nbEntries;
-                entropy -= p * Math.log(p);
+            if (occurrences.size()>1) {
+                for (int value : occurrences.values()) {
+                    double p = (double) value / nbEntries;
+                    entropy -= p * Math.log(p);
+                }
+            } else {
+                System.err.println("All same entry in the array");
             }
         } else {
             System.err.println("Empty array for calculating entropy");
@@ -103,10 +123,17 @@ public class Utils {
             }
         }
         double entropy = 0.0;
-        for (int value : occurrences.values()) {
-            double p = (double) value/nbEntries;
-            entropy -= p * Math.log(p);
-
+        if (!occurrences.isEmpty()) {
+            if (occurrences.size() > 1) {
+                for (int value : occurrences.values()) {
+                    double p = (double) value / nbEntries;
+                    entropy -= p * Math.log(p);
+                }
+            } else {
+                System.err.println("All same entry in the array");
+            }
+        } else {
+            System.err.println("Empty array for calculating entropy");
         }
         return entropy;
     }
