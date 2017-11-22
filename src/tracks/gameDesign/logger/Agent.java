@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import metrics.AgentData;
+import metrics.AgentState;
 import metrics.GameEvent;
 import metrics.GameLogger;
 import metrics.SampleLogger;
@@ -27,7 +27,6 @@ public class Agent extends AbstractPlayer {
 
     private tracks.singlePlayer.advanced.sampleMCTS.Agent actualAgent;
 
-    private GameLogger logger;
     GVGAILoggableGameState gvgaiLoggableGameState;
     public Random rnd;
 
@@ -38,8 +37,6 @@ public class Agent extends AbstractPlayer {
      */
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer){
         actualAgent = new tracks.singlePlayer.advanced.sampleMCTS.Agent(stateObs, elapsedTimer);
-        logger = new SampleLogger();
-        logger.startGame();
         gvgaiLoggableGameState = new GVGAILoggableGameState();
         rnd = new Random();
     }
@@ -63,7 +60,7 @@ public class Agent extends AbstractPlayer {
         logEvents(stateObs);
 
         /// LOGGING ACTIONS.
-        AgentData agentData = new AgentData();
+        AgentState agentData = new AgentState();
         agentData.setDecisiveness(actualAgent.getDecisiveness());
         agentData.setConvergence(actualAgent.getConvergence());
         logger.logAgentData(null, agentData);
@@ -122,8 +119,6 @@ public class Agent extends AbstractPlayer {
     {
         /// LOGGING GAME EVENTS
         logEvents(stateObs);
-
-        logger.terminateGame();
     }
 
     private void logEvents(StateObservation stateObs)

@@ -22,13 +22,9 @@ public class SampleLogger implements GameLogger {
     ArrayList<Double> decisivenessHistory;
     ArrayList<Double> convergenceHistory;
     ArrayList<Map<String, Integer>> gameObjects;
-
-
-    ArrayList<Double> scoreHistory;
-
-    ArrayList<Double> scores = new ArrayList();
+    ArrayList<Double> scoreHistory = new ArrayList();
     
-    MetricVisualiser visualiser = new MetricVisualiser();
+    MetricVisualiser visualiser;
 //    MetricVisualiser visualiserForAction = new MetricVisualiser();
     
     @Override
@@ -64,6 +60,7 @@ public class SampleLogger implements GameLogger {
         actionList = new ArrayList<>();
         gameEvents = new ArrayList<>();
         gameObjects = new ArrayList<>();
+        visualiser = new MetricVisualiser();
 
         resetRecords();
         return this;
@@ -73,7 +70,7 @@ public class SampleLogger implements GameLogger {
     @Override
     public GameLogger terminateGame() {
 
-        debug();
+        //debug();
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -87,7 +84,7 @@ public class SampleLogger implements GameLogger {
 
         Utils.printLogMsg("Entropy of actions: " + normalisedEntropy);
 
-        double[] scoreDiff = metrics.Utils.differentialArray(scores);
+        double[] scoreDiff = metrics.Utils.differentialArray(scoreHistory);
         Utils.printLogMsgWithTag("Score changes per game tick: ", scoreDiff);
         
         System.out.print("Decisiveness: ");
@@ -153,7 +150,7 @@ public class SampleLogger implements GameLogger {
     }
 
     @Override
-    public GameLogger logAgentData(LoggableGameState state, AgentData agentData) {
+    public GameLogger logAgentData(LoggableGameState state, AgentState agentData) {
         decisivenessHistory.add(agentData.getDecisiveness());
         convergenceHistory.add(agentData.getConvergence());
         return this;

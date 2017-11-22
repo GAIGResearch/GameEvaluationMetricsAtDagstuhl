@@ -9,7 +9,7 @@ package metrics;
  *
  * @author vv
  */
-public class AgentData {
+public class AgentState {
     private double decisiveness;
     private double convergence;
 

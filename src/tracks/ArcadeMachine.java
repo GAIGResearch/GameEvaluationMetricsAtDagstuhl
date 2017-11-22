@@ -16,6 +16,7 @@ import core.game.StateObservationMulti;
 import core.player.AbstractMultiPlayer;
 import core.player.AbstractPlayer;
 import core.player.Player;
+import metrics.GameLogger;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
 import tools.StatSummary;
@@ -389,7 +390,8 @@ public class ArcadeMachine {
      *   game, should be recorded. Accepts null if no recording is desired. If not null,
      *   this array must contain as much String objects as level_files.length*level_times.
      */
-    public static void runGames(String game_file, String[] level_files, int level_times, String agentName, String[] actionFiles) {
+    public static void runGames(String game_file, String[] level_files, int level_times, String agentName,
+								String[] actionFiles, GameLogger logger, boolean visuals) {
 	VGDLFactory.GetInstance().init(); // This always first thing to do.
 	VGDLRegistry.GetInstance().init();
 
@@ -466,14 +468,20 @@ public class ArcadeMachine {
 
 				disqCount++;
 		    }
+
+		    players[j].initLogger(logger);
 		}
+
 
 		// Play the game if at least 2 players in multiplayer games or
 		// at least 1 in single player.
 		// Get array of scores back.
 		if ((no_players - disqCount) >= toPlay.no_players) {
-		    score = toPlay.runGame(players, randomSeed);
-		    //score = toPlay.playGame(players, randomSeed, false, 0);
+			if(visuals)
+				score = toPlay.playGame(players, randomSeed, false, 0);
+			else
+		    	score = toPlay.runGame(players, randomSeed);
+
 		    toPlay.printResult();
 		} else {
 		    // Get the score for the result.
@@ -846,29 +854,29 @@ public class ArcadeMachine {
                 String scores = "", winState = "";
                 String[] actions = new String[toPlay.getGameTick() + 1];
                 for (int i = 0; i < actions.length; i++) {
-                actions[i] = "";
+					actions[i] = "";
                 }
 
                 for (Player p : players) {
-                // scores for all players
-                scores += toPlay.getScore(p.getPlayerID()) + " ";
+					// scores for all players
+					scores += toPlay.getScore(p.getPlayerID()) + " ";
 
-                // win state for all players
-                winState += (toPlay.getWinner(p.getPlayerID()) == Types.WINNER.PLAYER_WINS ? 1 : 0) + " ";
+					// win state for all players
+					winState += (toPlay.getWinner(p.getPlayerID()) == Types.WINNER.PLAYER_WINS ? 1 : 0) + " ";
 
-                // actions for all players (same line if during the same
-                // game tick)
-                int i = 0;
-                for (Types.ACTIONS act : p.getAllActions()) {
-                    actions[i] += act.toString() + " ";
-                    i++;
-                }
+					// actions for all players (same line if during the same
+					// game tick)
+					int i = 0;
+					for (Types.ACTIONS act : p.getAllActions()) {
+						actions[i] += act.toString() + " ";
+						i++;
+					}
                 }
 
                 // write everything to file
                 writer.write(scores + "\n" + winState + "\n");
                 for (String action : actions) {
-                writer.write(action + "\n");
+					writer.write(action + "\n");
                 }
 
                 writer.close();

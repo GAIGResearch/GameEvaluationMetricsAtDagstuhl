@@ -3,6 +3,7 @@ package core.player;
 import core.game.Game;
 import core.game.StateObservation;
 import core.game.StateObservationMulti;
+import metrics.GameLogger;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
  * Created by Raluca on 07-Apr-16.
  */
 public abstract class Player {
+
+    protected GameLogger logger;
 
     /**
      * playerID
@@ -92,6 +95,7 @@ public abstract class Player {
      */
     public void result(StateObservation stateObs, ElapsedCpuTimer elapsedCpuTimer)
     {
+        logger.terminateGame();
     }
 
     public void resultMulti(StateObservationMulti stateObs, ElapsedCpuTimer elapsedCpuTimer)
@@ -191,5 +195,11 @@ public abstract class Player {
     {
         //Overwrite this method in your controller to draw on the screen.
         //This method should be left empty in this class.
+    }
+
+    public void initLogger(GameLogger logger)
+    {
+        this.logger=logger;
+        logger.startGame();
     }
 }
