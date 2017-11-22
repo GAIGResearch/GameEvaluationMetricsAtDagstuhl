@@ -23,7 +23,7 @@ public class SampleLogger implements GameLogger {
     ArrayList<Map<String, Integer>> gameObjects;
     ArrayList<Double> scoreHistory;
     
-    MetricVisualiser visualiser = new MetricVisualiser();
+    MetricVisualiser visualiser;
 //    MetricVisualiser visualiserForAction = new MetricVisualiser();
     
     @Override
@@ -56,7 +56,6 @@ public class SampleLogger implements GameLogger {
 
     @Override
     public GameLogger startGame() {
-
         resetRecords();
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -65,7 +64,7 @@ public class SampleLogger implements GameLogger {
     @Override
     public GameLogger terminateGame() {
 
-        debug();
+        //debug();
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -139,7 +138,7 @@ public class SampleLogger implements GameLogger {
     }
 
     @Override
-    public GameLogger logAgentData(LoggableGameState state, AgentData agentData) {
+    public GameLogger logAgentData(LoggableGameState state, AgentState agentData) {
         decisivenessHistory.add(agentData.getDecisiveness());
         return this;
     }
