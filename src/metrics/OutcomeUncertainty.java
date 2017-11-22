@@ -19,18 +19,16 @@ import static tracks.singlePlayer.tools.ucbOptimizerAgent.Agent.ROLLOUT_DEPTH;
 public class OutcomeUncertainty {
     private int depth;
     private int nRoll;
-    private boolean score;
     private Random rnd;
     
     
-    public OutcomeUncertainty(int depth, int nRoll, boolean score){
+    public OutcomeUncertainty(int depth, int nRoll){
         this.depth = depth;
         this.nRoll = nRoll;
-        this.score=score;
         this.rnd = new Random();
     }
     
-    public double computeUncertainty(StateObservation stateObs){
+    public double computeUncertainty(StateObservation stateObs, boolean score){
         double[] results = new double[this.nRoll];
         ArrayList<Types.ACTIONS> actions = stateObs.getAvailableActions();
         StateObservation current = null;
@@ -42,7 +40,7 @@ public class OutcomeUncertainty {
                 current.advance(actions.get(action));
                 depth++;
             }
-            if(this.score){
+            if(score){
                 results[i] = current.getGameScore();
             }else{
                 results[i] = stateObs.getGameWinner().ordinal();
