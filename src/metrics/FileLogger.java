@@ -43,6 +43,7 @@ public class FileLogger implements GameLogger{
     public GameLogger terminateGame() {
         double normalisedEntropy = metrics.Utils.normalisedEntropy(actionList);
         System.out.println("[LOGGER] Entropy of actions: " + normalisedEntropy);
+
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
