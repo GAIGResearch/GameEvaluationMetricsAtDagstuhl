@@ -23,7 +23,7 @@ public class DataWriter {
 
         for (Map.Entry<String,  ArrayList<Double>> entry : data.entrySet()) {
             String key = entry.getKey();
-            measureNames += key + " ";
+            measureNames += "\"" + key + "\" ";
             String entryStr = key + ".groupId = " + 0 + ";\n";  //todo
             entryStr += key + ".data = [";
             ArrayList<Double> values = entry.getValue();
