@@ -113,8 +113,8 @@ public class SqueezeGraphPanel extends JPanel {
 				String max_up = Float.toString(max_y);
 				max_up = max_up.substring(0, Math.min(max_up.length(), 5));
 				//
-				graphics.drawString("Upper: " + up_count + " (" + av_ups + ", " + max_up + ")", 10,
-						40);
+				//graphics.drawString("Upper: " + up_count + " (" + av_ups + ", " + max_up + ")", 10,
+				//		40);
 				//graphics.drawString("Downer: " + down_count + " (" + av_downs + ", " + max_down
 				//		+ ")", 10, 80);
 			} finally {

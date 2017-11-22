@@ -21,7 +21,7 @@ public class SampleLogger implements GameLogger {
     ArrayList<GameEvent[]> gameEvents;
     ArrayList<Double> decisivenessHistory;
     ArrayList<Map<String, Integer>> gameObjects;
-    ArrayList<Double> scoreHistory = new ArrayList();
+    // ArrayList<Double> scoreHistory = new ArrayList();
 
     Map<String,ArrayList<Double>> measures = new HashMap<>();
 
@@ -29,7 +29,8 @@ public class SampleLogger implements GameLogger {
 
 
     // ArrayList<ArrayList<Double>> scoreHistories = new ArrayList<>();
-    
+    ArrayList<Double> scoreHistory;
+
     MetricVisualiser visualiser;
 //    MetricVisualiser visualiserForAction = new MetricVisualiser();
 
@@ -89,7 +90,6 @@ public class SampleLogger implements GameLogger {
         gameEvents = new ArrayList<>();
         gameObjects = new ArrayList<>();
         visualiser = new MetricVisualiser();
-
 
         resetRecords();
         return this;
@@ -178,6 +178,7 @@ public class SampleLogger implements GameLogger {
         actionList = new ArrayList<>();
         scoreHistory = new ArrayList<>();
         gameEvents = new ArrayList<>();
+        gameObjects = new ArrayList<>();
         decisivenessHistory = new ArrayList<>();
     }
 
