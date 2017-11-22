@@ -37,6 +37,8 @@ public class SampleLogger implements GameLogger {
 
     String scoreField = "Score";
 
+    DataWriter dataWriter = new DataWriter();
+
 
     public SampleLogger() {
         // need to build the things that we wish to log
@@ -84,6 +86,12 @@ public class SampleLogger implements GameLogger {
         // this code works but is a bit ugly
         // since we need to repeat it for everything that we log
         gameLogs.add(measures);
+        if (measures == null || measures.isEmpty()) {
+            System.err.println("Measures is empty or null.");
+        }
+        System.out.println("below print the measures");
+        dataWriter.printData(measures);
+        System.out.println("above print the measures");
 
         System.out.println(gameLogs);
 
