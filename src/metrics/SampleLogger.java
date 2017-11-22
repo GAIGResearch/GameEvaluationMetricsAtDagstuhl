@@ -38,8 +38,11 @@ public class SampleLogger implements GameLogger {
 //    MetricVisualiser visualiserForAction = new MetricVisualiser();
 
     String scoreField = "Score";
-
     String actionField = "Action";
+    String decField = "Decisiveness";
+    String convField = "Convergence";
+    String outcomeScField = "OutcomeUncertaintyScore";
+    String outcomeStField = "OutcomeUncertaintyState";
 
 
     public SampleLogger() {
@@ -58,6 +61,10 @@ public class SampleLogger implements GameLogger {
 
         measures.get(scoreField).add(state.getScore());
         measures.get(actionField).add((double) state.allActions()[0]);
+        measures.get(decField).add(state.getDecisiveness());
+        measures.get(convField).add(state.getConvergence());
+        measures.get(outcomeStField).add(state.getOutcomeUncertaintyState());
+        measures.get(outcomeScField).add(state.getOutcomeUncertaintyScore());
 
 //        for(GameEvent ge : state.getGameEvents())
 //        {
@@ -82,6 +89,10 @@ public class SampleLogger implements GameLogger {
         measures = new HashMap<>();
         measures.put(scoreField, new ArrayList<>());
         measures.put(actionField, new ArrayList<>());
+        measures.put(decField, new ArrayList<>());
+        measures.put(convField, new ArrayList<>());
+        measures.put(outcomeScField, new ArrayList<>());
+        measures.put(outcomeStField, new ArrayList<>());
 
 
         //actionList = new ArrayList<>();
