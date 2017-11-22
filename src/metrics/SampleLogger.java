@@ -21,11 +21,7 @@ public class SampleLogger implements GameLogger {
     ArrayList<GameEvent[]> gameEvents;
     ArrayList<Double> decisivenessHistory;
     ArrayList<Map<String, Integer>> gameObjects;
-
-
-    ArrayList<Double> scoreHistory;
-
-    ArrayList<Double> scores = new ArrayList();
+    ArrayList<Double> scoreHistory = new ArrayList();
     
     MetricVisualiser visualiser;
 //    MetricVisualiser visualiserForAction = new MetricVisualiser();
@@ -87,7 +83,7 @@ public class SampleLogger implements GameLogger {
 
         Utils.printLogMsg("Entropy of actions: " + normalisedEntropy);
 
-        double[] scoreDiff = metrics.Utils.differentialArray(scores);
+        double[] scoreDiff = metrics.Utils.differentialArray(scoreHistory);
         Utils.printLogMsgWithTag("Score changes per game tick: ", scoreDiff);
         
         System.out.print("Decisiveness: ");
