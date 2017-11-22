@@ -31,38 +31,6 @@ public class FileLogger implements GameLogger{
         gameEvents.add(gameEventsNow);
         return this;
     }
-
-    @Override
-    public GameLogger logObjectDensity(Map<String, Integer> objects) {
-        return null;
-    }
-
-    @Override
-    public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
-        actionList.add(actions[0]);
-
-        Charset utf8 = StandardCharsets.UTF_8;
-        List<String> logg = new ArrayList<>();
-
-        actionList.forEach((action)->logg.add(action.toString()));
-
-        try {
-            Files.write(Paths.get("Logg_file.txt"), logg, utf8,
-                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return this;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public GameLogger logAgentData(LoggableGameState state, AgentState agentData) {
-        decisivenessHistory.add(agentData.getDecisiveness());
-        return this;
-    }
-    
     
     @Override
     public GameLogger startGame() {
@@ -77,6 +45,11 @@ public class FileLogger implements GameLogger{
         System.out.println("[LOGGER] Entropy of actions: " + normalisedEntropy);
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public GameLogger logState(LoggableGameState state) {
+        return null;
     }
 
     public void resetRecords() {

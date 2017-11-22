@@ -21,6 +21,15 @@ public class SingleMCTSPlayer
      */
     public SingleTreeNode m_root;
     private double decisiveness;
+    private double convergence;
+
+    public double getConvergence() {
+        return convergence;
+    }
+
+    public void setConvergence(double convergence) {
+        this.convergence = convergence;
+    }
 
     public double getDecisiveness() {
         return decisiveness;
@@ -64,7 +73,8 @@ public class SingleMCTSPlayer
     public int run(ElapsedCpuTimer elapsedTimer)
     {
         //Do the search within the available time.
-        m_root.mctsSearch(elapsedTimer);
+        double conv = m_root.mctsSearch(elapsedTimer);
+        this.setConvergence(conv);
 
         //Determine the best action to take and return it.
         int action = m_root.mostVisitedAction();

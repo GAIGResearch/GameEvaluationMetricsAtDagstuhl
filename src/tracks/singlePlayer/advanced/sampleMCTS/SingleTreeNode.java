@@ -4,6 +4,7 @@ import java.util.Random;
 
 import core.game.StateObservation;
 import static metrics.Utils.entropy;
+import static metrics.Utils.normalisedEntropy;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
 import tools.Utils;
@@ -49,7 +50,7 @@ public class SingleTreeNode
     }
 
 
-    public void mctsSearch(ElapsedCpuTimer elapsedTimer) {
+    public double mctsSearch(ElapsedCpuTimer elapsedTimer) {
 
         double avgTimeTaken = 0;
         double acumTimeTaken = 0;
@@ -57,6 +58,10 @@ public class SingleTreeNode
         int numIters = 0;
 
         int remainingLimit = 5;
+        int prevSelected = -1;
+        int iterationCounter = 0;
+        int ticksConverged = 0;
+        
         while(remaining > 2*avgTimeTaken && remaining > remainingLimit){
         //while(numIters < Agent.MCTS_ITERATIONS){
 
@@ -72,7 +77,15 @@ public class SingleTreeNode
             //System.out.println(elapsedTimerIteration.elapsedMillis() + " --> " + acumTimeTaken + " (" + remaining + ")");
             avgTimeTaken  = acumTimeTaken/numIters;
             remaining = elapsedTimer.remainingTimeMillis();
+            if(prevSelected==mostVisitedAction()){
+                ticksConverged++;
+            }else{
+                ticksConverged = 0;
+                prevSelected = mostVisitedAction();
+            }
+            iterationCounter++;
         }
+        return (double) ticksConverged/iterationCounter;
     }
 
     public SingleTreeNode treePolicy(StateObservation state) {
@@ -299,7 +312,7 @@ public class SingleTreeNode
 
             }
         }
-        return entropy(visitCounts);
+        return normalisedEntropy(visitCounts);
     }
     
     
