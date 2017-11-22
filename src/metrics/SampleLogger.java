@@ -25,32 +25,19 @@ public class SampleLogger implements GameLogger {
     
     MetricVisualiser visualiser;
 //    MetricVisualiser visualiserForAction = new MetricVisualiser();
-    
+
+
     @Override
-    public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
-        actionList.add(actions[0]);
-//        if (actionMap.containsKey(actions[0])) {
-//            actionMap.put(actions[0], actionMap.get(actions[0])+1);
-//        } else {
-//            actionMap.put(actions[0], 1);
-//        }
+    public GameLogger logState(LoggableGameState state) {
+
+        actionList.add(state.allActions()[0]);
+        gameEvents.add(state.getGameEvents());
+        gameObjects.add(state.getGameObjects());
+
         if (state != null){
             visualiser.update(state);
         }
 
-        return this;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public GameLogger logEvents(GameEvent[] gameEventsNow)
-    {
-        gameEvents.add(gameEventsNow);
-        return this;
-    }
-
-    public GameLogger logObjectDensity(Map<String, Integer> objects)
-    {
-        gameObjects.add(objects);
         return this;
     }
 
@@ -139,12 +126,6 @@ public class SampleLogger implements GameLogger {
         scoreHistory = new ArrayList<>();
         gameEvents = new ArrayList<>();
         decisivenessHistory = new ArrayList<>();
-    }
-
-    @Override
-    public GameLogger logAgentData(LoggableGameState state, AgentState agentData) {
-        decisivenessHistory.add(agentData.getDecisiveness());
-        return this;
     }
 
 }

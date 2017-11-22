@@ -20,6 +20,10 @@ public interface LoggableGameState {
 
     HashMap<String, Integer> getGameObjects();
 
+    GameEvent[] getGameEvents();
+
+
+
     // List<Object> getGameState();
 
 }
