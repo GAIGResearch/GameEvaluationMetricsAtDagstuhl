@@ -2,7 +2,6 @@ package metrics;
 
 import metrics.plot.MetricVisualiser;
 
-import java.nio.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -59,7 +58,7 @@ public class FileLogger implements GameLogger{
     }
 
     @Override
-    public GameLogger logAgentData(LoggableGameState state, AgentData agentData) {
+    public GameLogger logAgentData(LoggableGameState state, AgentState agentData) {
         decisivenessHistory.add(agentData.getDecisiveness());
         return this;
     }

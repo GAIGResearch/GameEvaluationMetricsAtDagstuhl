@@ -27,7 +27,7 @@ public class SampleLogger implements GameLogger {
 
     ArrayList<Double> scores = new ArrayList();
     
-    MetricVisualiser visualiser = new MetricVisualiser();
+    MetricVisualiser visualiser;
 //    MetricVisualiser visualiserForAction = new MetricVisualiser();
     
     @Override
@@ -63,6 +63,7 @@ public class SampleLogger implements GameLogger {
         actionList = new ArrayList<>();
         gameEvents = new ArrayList<>();
         gameObjects = new ArrayList<>();
+        visualiser = new MetricVisualiser();
 
         resetRecords();
         return this;
@@ -145,7 +146,7 @@ public class SampleLogger implements GameLogger {
     }
 
     @Override
-    public GameLogger logAgentData(LoggableGameState state, AgentData agentData) {
+    public GameLogger logAgentData(LoggableGameState state, AgentState agentData) {
         decisivenessHistory.add(agentData.getDecisiveness());
         return this;
     }
