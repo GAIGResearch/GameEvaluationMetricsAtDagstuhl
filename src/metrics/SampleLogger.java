@@ -43,18 +43,14 @@ public class SampleLogger implements GameLogger {
         // good to do it this way using a HashMap because we need to process them in general ways later
 
         // start with the score
-
-
     }
-    
+
     @Override
-    public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
-        actionList.add(actions[0]);
-//        if (actionMap.containsKey(actions[0])) {
-//            actionMap.put(actions[0], actionMap.get(actions[0])+1);
-//        } else {
-//            actionMap.put(actions[0], 1);
-//        }
+    public GameLogger logState(LoggableGameState state) {
+
+        actionList.add(state.allActions()[0]);
+        gameEvents.add(state.getGameEvents());
+        gameObjects.add(state.getGameObjects());
 
         measures.get(scoreField).add(state.getScore());
 
@@ -62,21 +58,6 @@ public class SampleLogger implements GameLogger {
             visualiser.update(state);
         }
 
-
-
-        return this;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public GameLogger logEvents(GameEvent[] gameEventsNow)
-    {
-        gameEvents.add(gameEventsNow);
-        return this;
-    }
-
-    public GameLogger logObjectDensity(Map<String, Integer> objects)
-    {
-        gameObjects.add(objects);
         return this;
     }
 
@@ -102,8 +83,6 @@ public class SampleLogger implements GameLogger {
 
         // this code works but is a bit ugly
         // since we need to repeat it for everything that we log
-
-
         gameLogs.add(measures);
 
         System.out.println(gameLogs);
@@ -188,13 +167,6 @@ public class SampleLogger implements GameLogger {
         gameObjects = new ArrayList<>();
         decisivenessHistory = new ArrayList<>();
         convergenceHistory = new ArrayList<>();
-    }
-
-    @Override
-    public GameLogger logAgentData(LoggableGameState state, AgentState agentData) {
-        decisivenessHistory.add(agentData.getDecisiveness());
-        convergenceHistory.add(agentData.getConvergence());
-        return this;
     }
 
 }
