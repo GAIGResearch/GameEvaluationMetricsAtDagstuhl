@@ -14,10 +14,7 @@ import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import core.vgdl.VGDLRegistry;
-import java.util.Random;
-import static metrics.Utils.normalisedEntropy;
-import ontology.Types.ACTIONS;
-import static tracks.singlePlayer.tools.ucbOptimizerAgent.Agent.ROLLOUT_DEPTH;
+
 
 
 /**
@@ -28,7 +25,6 @@ public class Agent extends AbstractPlayer {
     private tracks.singlePlayer.advanced.sampleMCTS.Agent actualAgent;
 
     GVGAILoggableGameState gvgaiLoggableGameState;
-    public Random rnd;
 
     /**
      * initialize all variables for the agent
@@ -38,7 +34,6 @@ public class Agent extends AbstractPlayer {
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer){
         actualAgent = new tracks.singlePlayer.advanced.sampleMCTS.Agent(stateObs, elapsedTimer);
         gvgaiLoggableGameState = new GVGAILoggableGameState();
-        rnd = new Random();
     }
 
     /**
@@ -68,52 +63,12 @@ public class Agent extends AbstractPlayer {
 
         gvgaiLoggableGameState.setGameState(stateObs);
         logger.logAction(gvgaiLoggableGameState, new int[]{a.ordinal()}, null);
-        System.out.println(scoreUncertainty(stateObs));
-        System.out.println(outcomeUncertainty(stateObs));
         // double score = stateObs.getGameScore();
         // logger.logScore(null, new double[]{score}, null);
 
         return a;
     }
     
-    public double scoreUncertainty(StateObservation stateObs){
-        int depth = 15;
-        int noRoll = 20;
-        double[] scores = new double[noRoll];
-        ArrayList<ACTIONS> actions = stateObs.getAvailableActions();
-        StateObservation current = null;
-
-        for(int i=0; i<noRoll; i++){
-            current = stateObs.copy();
-            while (!stateObs.isGameOver() && depth >= ROLLOUT_DEPTH) {
-                int action = rnd.nextInt(actions.size());
-                stateObs.advance(actions.get(action));
-                depth++;
-            }
-            scores[i] = stateObs.getGameScore();
-        }
-        return normalisedEntropy(scores);
-    }
-    
-        public double outcomeUncertainty(StateObservation stateObs){
-        int depth = 15;
-        int noRoll = 20;
-        double[] outcomes = new double[noRoll];
-        ArrayList<ACTIONS> actions = stateObs.getAvailableActions();
-        StateObservation current = null;
-
-        for(int i=0; i<noRoll; i++){
-            current = stateObs.copy();
-            while (!stateObs.isGameOver() && depth >= ROLLOUT_DEPTH) {
-                int action = rnd.nextInt(actions.size());
-                stateObs.advance(actions.get(action));
-                depth++;
-            }
-            outcomes[i] = stateObs.getGameWinner().ordinal();
-            System.out.println(outcomes[i]);
-        }
-        return normalisedEntropy(outcomes);
-    }
 
     public void result(StateObservation stateObs, ElapsedCpuTimer elapsedCpuTimer)
     {
