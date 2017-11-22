@@ -22,7 +22,10 @@ public interface LoggableGameState {
 
     GameEvent[] getGameEvents();
 
-
+    public double getOutcomeUncertaintyState();
+    public double getOutcomeUncertaintyScore();
+    public double getConvergence();
+    public double getDecisiveness();
 
     // List<Object> getGameState();
 
