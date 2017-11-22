@@ -28,6 +28,8 @@ public class SampleLogger implements GameLogger {
     ArrayList<Map<String,ArrayList<Double>>> gameLogs = new ArrayList<>();
 
 
+
+
     // ArrayList<ArrayList<Double>> scoreHistories = new ArrayList<>();
     ArrayList<Double> scoreHistory;
 
