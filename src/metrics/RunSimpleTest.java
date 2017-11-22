@@ -46,7 +46,7 @@ public class RunSimpleTest {
         //double[] gameScore = ArcadeMachine.runOneGame(map, level, true, playerClassString, action_file, seed, 0);
 
         GameLogger logger = new SampleLogger();
-        int NUM_GAMES = 1;
+        int NUM_GAMES = 2;
         boolean visuals = true;
         ArcadeMachine.runGames(game, new String[]{level}, NUM_GAMES, playerClassString, null, logger, visuals);
     }

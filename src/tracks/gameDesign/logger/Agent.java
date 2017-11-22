@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import metrics.AgentState;
 import metrics.GameEvent;
 import metrics.GameLogger;
 import metrics.SampleLogger;
@@ -14,6 +13,7 @@ import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import core.vgdl.VGDLRegistry;
+
 
 
 /**
@@ -51,21 +51,25 @@ public class Agent extends AbstractPlayer {
         gvgaiLoggableGameState.setGameObjects(thisCountMap);
 
         /// LOGGING GAME EVENTS
-        logEvents(stateObs);
 
-        /// LOGGING ACTIONS.
-        AgentState agentData = new AgentState();
-        agentData.setDecisiveness(actualAgent.getDecisiveness());
-        logger.logAgentData(null, agentData);
+        GameEvent events[] = logEvents(stateObs);
+        gvgaiLoggableGameState.setGameEvents(events);
 
+
+        gvgaiLoggableGameState.setDecisiveness(actualAgent.getDecisiveness());
 
         gvgaiLoggableGameState.setGameState(stateObs);
-        logger.logAction(gvgaiLoggableGameState, new int[]{a.ordinal()}, null);
+        gvgaiLoggableGameState.setActions(new int[]{a.ordinal()});
+
+        logger.logState(gvgaiLoggableGameState);
+
+        //logger.logAction(gvgaiLoggableGameState, null, null);
         // double score = stateObs.getGameScore();
         // logger.logScore(null, new double[]{score}, null);
 
         return a;
     }
+    
 
     public void result(StateObservation stateObs, ElapsedCpuTimer elapsedCpuTimer)
     {
@@ -73,7 +77,7 @@ public class Agent extends AbstractPlayer {
         logEvents(stateObs);
     }
 
-    private void logEvents(StateObservation stateObs)
+    private GameEvent[] logEvents(StateObservation stateObs)
     {
         ArrayList<String> eventsThisTick = stateObs.getEventsThisTick();
         if(eventsThisTick != null) {
@@ -86,10 +90,10 @@ public class Agent extends AbstractPlayer {
                 i++;
             }
 
-            logger.logEvents(events);
-        }else if(stateObs.getGameTick() > 0){
-            logger.logEvents(null);
+            return events;
+        //}else if(stateObs.getGameTick() > 0){
         }
+        return null;
     }
 
     ///LOG OBJECT DENSITY
@@ -105,7 +109,7 @@ public class Agent extends AbstractPlayer {
         _logObjects(thisCountMap, stateObs.getPortalsPositions());
         _logObjects(thisCountMap, stateObs.getFromAvatarSpritesPositions());
 
-        logger.logObjectDensity(thisCountMap);
+        //logger.logObjectDensity(thisCountMap);
         return thisCountMap;
 
     }
