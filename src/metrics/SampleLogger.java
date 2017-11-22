@@ -22,9 +22,28 @@ public class SampleLogger implements GameLogger {
     ArrayList<Double> decisivenessHistory;
     ArrayList<Map<String, Integer>> gameObjects;
     ArrayList<Double> scoreHistory = new ArrayList();
+
+    Map<String,ArrayList<Double>> measures = new HashMap<>();
+
+    ArrayList<Map<String,ArrayList<Double>>> gameLogs = new ArrayList<>();
+
+
+    // ArrayList<ArrayList<Double>> scoreHistories = new ArrayList<>();
     
     MetricVisualiser visualiser;
 //    MetricVisualiser visualiserForAction = new MetricVisualiser();
+
+    String scoreField = "Score";
+
+
+    public SampleLogger() {
+        // need to build the things that we wish to log
+        // good to do it this way using a HashMap because we need to process them in general ways later
+
+        // start with the score
+
+
+    }
     
     @Override
     public GameLogger logAction(LoggableGameState state, int[] actions, GameEvent[] events) {
@@ -34,9 +53,14 @@ public class SampleLogger implements GameLogger {
 //        } else {
 //            actionMap.put(actions[0], 1);
 //        }
+
+        measures.get(scoreField).add(state.getScore());
+
         if (state != null){
             visualiser.update(state);
         }
+
+
 
         return this;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -56,10 +80,16 @@ public class SampleLogger implements GameLogger {
 
     @Override
     public GameLogger startGame() {
+
+        measures = new HashMap<>();
+        measures.put(scoreField, new ArrayList<>());
+
+
         actionList = new ArrayList<>();
         gameEvents = new ArrayList<>();
         gameObjects = new ArrayList<>();
         visualiser = new MetricVisualiser();
+
 
         resetRecords();
         return this;
@@ -68,6 +98,16 @@ public class SampleLogger implements GameLogger {
 
     @Override
     public GameLogger terminateGame() {
+
+        // this code works but is a bit ugly
+        // since we need to repeat it for everything that we log
+
+
+        gameLogs.add(measures);
+
+        System.out.println(gameLogs);
+
+        // scoreHistories.add(scoreHistory);
 
         //debug();
         return this;
