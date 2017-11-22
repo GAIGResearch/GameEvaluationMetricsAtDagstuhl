@@ -112,7 +112,6 @@ public class Agent extends AbstractPlayer {
                 stateObs.advance(actions.get(action));
                 depth++;
             }
-            //TODO: check different outcome possibilites
             outcomes[i] = stateObs.getGameWinner().ordinal();
             System.out.println(outcomes[i]);
         }
