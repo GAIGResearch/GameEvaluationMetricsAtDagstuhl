@@ -31,6 +31,7 @@ public class SampleLogger implements GameLogger {
 
 
 
+
     // ArrayList<ArrayList<Double>> scoreHistories = new ArrayList<>();
     ArrayList<Double> scoreHistory;
 
